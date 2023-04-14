@@ -5,6 +5,10 @@ const routeOptions = [
     path: '/',
     name: 'LoginPage',
   },
+  {
+    path: '/user/:id',
+    name: 'UserProfile',
+  },
 ];
 
 const routes = routeOptions.map((route) => {

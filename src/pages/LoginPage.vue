@@ -1,7 +1,7 @@
 <template>
     <div class="login">
-        <img class="login_logo" src="../../public/check.svg" alt="logo" />
-        <span v-if="loginError">Login Failed</span>
+        <img class="login_logo" src="/check.svg" alt="logo" />
+        <span class="error" :class="{'error-visible': loginError}">Login Failed</span>
         <LoginForm @emit-credentials="loginValidation" />
     </div>
 </template>
@@ -20,7 +20,7 @@ const router: Router = useRouter()
 let loginError: Ref<boolean> = ref(false)
 
 async function loginValidation(credentials: any): Promise<void> {
-    await getUser(credentials.email).then((user: User) => {
+    await getUser(credentials.email, credentials.password).then((user: User) => {
         usersData.value = user
     })
 
@@ -37,7 +37,7 @@ async function loginValidation(credentials: any): Promise<void> {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .login {
     display: flex;
     flex-direction: column;
@@ -47,6 +47,16 @@ async function loginValidation(credentials: any): Promise<void> {
 
 .login_logo {
     width: 100px;
-    margin: 50px 0 100px 0;
-} 
+    margin: 50px 0 50px 0;
+}
+
+.error {
+    margin-bottom: 50px;
+    opacity: 0;
+    color: $fourth-color;
+}
+
+.error-visible {
+    opacity: 1;
+}
 </style>

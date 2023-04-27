@@ -1,8 +1,13 @@
 <template>
     <div class="login">
-        <img class="login_logo" src="/check.svg" alt="logo" />
-        <span class="error" :class="{'error-visible': loginError}">Login Failed</span>
-        <LoginForm @emit-credentials="loginValidation" />
+        <div class="login_signup">
+            <router-link class="todo-button" to="signup" >Signup</router-link>
+        </div>
+        <div class="login_main">
+            <img class="login_main_logo" src="/check.svg" alt="logo" />
+            <span class="error" :class="{'error-visible': loginError}">Login Failed</span>
+            <LoginForm @emit-credentials="loginValidation" />
+        </div>
     </div>
 </template>
 
@@ -24,6 +29,8 @@ async function loginValidation(credentials: any): Promise<void> {
         usersData.value = user
     })
 
+    console.log(usersData.value)
+
     if (usersData.value) {
         router.push({
             path: `/user/${usersData.value.id}`
@@ -38,16 +45,24 @@ async function loginValidation(credentials: any): Promise<void> {
 </script>
 
 <style scoped lang="scss">
-.login {
+.login_signup {
+    display: flex;
+    justify-content: end;
+}
+.login_main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
 }
 
-.login_logo {
+.login_main_logo {
     width: 100px;
-    margin: 50px 0 50px 0;
+    margin-bottom: 50px;
+}
+
+.todo-button {
+    margin: $medium-all;
+    text-decoration: none;
 }
 
 .error {

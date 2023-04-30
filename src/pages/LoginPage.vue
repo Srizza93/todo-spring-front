@@ -29,8 +29,6 @@ async function loginValidation(credentials: any): Promise<void> {
         usersData.value = user
     })
 
-    console.log(usersData.value)
-
     if (usersData.value) {
         router.push({
             path: `/user/${usersData.value.id}`

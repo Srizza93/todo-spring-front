@@ -170,6 +170,11 @@ async function submitForm(): Promise<void> {
     background-color: $primary-color;
 }
 
+.todo-button:hover {
+    background-color: $third-color;
+    color: $primary-color;
+}
+
 .error {
     color: $third-color;
     transition: 1.5s;

@@ -1,7 +1,11 @@
 <template>
     <div class="todos">
-        <div class="todos_todo" v-for="todo in todos" :key="todo.id">
-            <span v-if="todo.due" class="todos_todo_due">Due: {{ formatDate(todo.due) }}</span>
+        <div class="todos_todo" v-for="todo in todos" :key="todo.id" :class="{ 'todo-expired': isTodoExpired(todo)}">
+            <span v-if="todo.due" class="todos_todo_due">
+                <b v-if="!isTodoExpired(todo)">Due:</b>
+                <b v-else>Expired:</b>
+                 {{ formatDate(todo.due) }}
+            </span>
             <div class="todos_todo_middle">
                 <p class="todos_todo_middle_content">{{ todo.content }}</p>
                 <div class="todos_todo_middle_content_icons">
@@ -27,7 +31,7 @@
                     />
                 </div>
             </div>
-            <span class="todos_todo_created">Created: {{ formatDate(todo.created) }}</span>
+            <span class="todos_todo_created"><b>Created:</b> {{ formatDate(todo.created) }}</span>
         </div>
     </div>
 </template>
@@ -36,7 +40,7 @@
 import type { SelectedTodos, Todo } from "../../types/TodoType"
 import { formatDate } from "../../services/formatDate"
 
-defineProps<{
+const props = defineProps<{
   todos: Todo[];
   selectedTodos: SelectedTodos;
 }>();
@@ -54,6 +58,17 @@ function emitDone(todo: Todo, done: boolean): void {
     todo.done = done
     submitEmit('emit-done', todo)
 }
+
+function isTodoExpired(todo: Todo): boolean {
+    if (todo.due && props.selectedTodos !== 'DONE') {
+        const dueTime: number = new Date(formatDate(todo.due)).getTime()
+        const createdTime: number = new Date(formatDate(todo.created)).getTime()
+        if(dueTime < createdTime) {
+            return true
+        }
+    } 
+    return false
+}
 </script>
 
 <style lang="scss" scoped>
@@ -69,9 +84,15 @@ function emitDone(todo: Todo, done: boolean): void {
     max-width: 800px;
     padding: $medium-all;
     margin: $small-all;
-    border: 1.5px solid $third-color;
+    border: 3px solid $third-color;
     border-radius: $radius;
     background-color: $fourth-color;
+}
+
+.todo-expired {
+    background-color: $third-color;
+    border: 3px solid $fourth-color;
+
 }
 
 .todos_todo_due {
@@ -83,12 +104,21 @@ function emitDone(todo: Todo, done: boolean): void {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: $small-all;
 }
 
 .todos_todo_middle_content {
-    margin: $medium-all;
+    padding: $medium-all;
+    border-radius: $radius;
+    width: 100%;
+    margin: 15px 15px 15px 0;
+    background-color: $third-color-opacity;
 }
+
+.todo-expired 
+ .todos_todo_middle 
+  .todos_todo_middle_content {
+    background-color: $fourth-color-opacity;
+  }
 
 .todos_todo_middle_content_icons {
     display: flex;
@@ -117,5 +147,13 @@ function emitDone(todo: Todo, done: boolean): void {
 
 .todos_todo_created {
     font-size: 14px;
+}
+
+@media screen and (max-width: 510px) {
+    
+    .todos_todo_middle {
+    flex-direction: column;
+}
+
 }
 </style>

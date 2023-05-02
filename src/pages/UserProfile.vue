@@ -21,12 +21,15 @@
         </div>
         <TodoModal v-if="todoModal" @emit-closure="closeTodoModal" @emit-submit="submitTodo" />
         <TodosComponent 
-          v-if="todos" 
+          v-if="todos && !pending" 
           @emit-delete="deleteTodoItem" 
           @emit-done="submitDone" 
           :todos="todos" 
           :selectedTodos="selectedTodos"
         />
+        <div class="profile_custom-loader" v-else-if="pending">
+            <CustomLoader />
+        </div>
         <div v-else class="profile_no-todos">
             <span>There are no todos here</span>
         </div>
@@ -42,6 +45,7 @@ import type { RouteLocationNormalizedLoaded } from "vue-router"
 import { useRoute } from "vue-router"
 import TodoModal from "../components/userProfile/TodoModal.vue"
 import TodosComponent from "../components/userProfile/TodosComponent.vue"
+import CustomLoader from "../components/CustomLoader.vue"
 
 const route: RouteLocationNormalizedLoaded = useRoute();
 const todoButtons: Ref<TodoIndex[]> = ref([
@@ -67,9 +71,19 @@ const todoButtons: Ref<TodoIndex[]> = ref([
 const todos: Ref<Todo[]> = ref([])
 const selectedTodos: Ref<SelectedTodos> = ref(SelectedTodos.TODAY)
 const todoModal: Ref<boolean> = ref(false)
+const pending: Ref<boolean> = ref(false)
 
 async function retrieveTodos(): Promise<void> {
-    todos.value = await getTodos(selectedTodos.value, route.params.id.toString())
+    await getTodos(selectedTodos.value, route.params.id.toString())
+      .then((response) => {
+        todos.value = response
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+      .finally(() => {
+        pending.value = false
+      })
     console.log(todos.value)
 }
 
@@ -85,7 +99,7 @@ function closeTodoModal(): void {
     todoModal.value = false
 }
 
-async function submitTodo(todo: { dueDate: string, content: string, today: string }): Promise<void> {
+async function submitTodo(todo: { dueDate: Date, content: string, today: Date }): Promise<void> {
     todoModal.value = false
     const newTodo: Todo = {
         userId: route.params.id.toString(),
@@ -113,6 +127,7 @@ onMounted(() => {
 })
 
 watch(() => selectedTodos.value, () => {
+    pending.value = true
     retrieveTodos()
 })
 </script>
@@ -125,6 +140,7 @@ watch(() => selectedTodos.value, () => {
     min-height: 100vh;
     margin: 15px 0;
     color: $primary-color;
+    transition-duration: 2s;
 }
 
 .todo-button {
@@ -153,6 +169,12 @@ watch(() => selectedTodos.value, () => {
 
 .profile_add_icon:hover {
     opacity: .7;
+}
+
+.profile_custom-loader {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
 }
 
 .profile_no-todos {

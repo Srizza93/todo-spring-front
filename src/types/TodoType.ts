@@ -2,8 +2,8 @@ export interface Todo {
     id?: number
     userId: string
     content: string
-    due?: string
-    created: string
+    due?: Date
+    created: Date
     done: boolean
 }
 

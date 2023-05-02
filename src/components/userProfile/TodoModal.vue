@@ -9,7 +9,7 @@
                   class="modal_calendar_container_input"
                   v-model="dueDate"
                   type="date" 
-                  :min="today"
+                  :min="formatDate(today)"
                 />
             </div>
             <span>{{ dueDate }}</span>
@@ -22,6 +22,7 @@
           placeholder="Write a todo..."
           autofocus
           contenteditable
+          @keyup.enter="emitSubmit"
         ></textarea>
         <input class="todo-button" type="submit" value="Add" />
     </form>
@@ -34,8 +35,7 @@ import { ref } from "vue"
 const submitEmit = defineEmits(['emit-closure', 'emit-submit'])
 const dueDate: Ref<Date | null> = ref(null)
 const content: Ref<string> = ref("")
-const date: Date = new Date()
-const today: string = formatDate(date)
+const today: Date = new Date()
   
 
 function emitClosure(): void {
@@ -43,9 +43,7 @@ function emitClosure(): void {
 }
 
 function emitSubmit(): void {
-    const formatDueDate: Date | null = dueDate.value ? new Date(dueDate.value) : null
-    const newDueDate: string | null = formatDueDate ? formatDate(formatDueDate) : null
-    submitEmit('emit-submit', { dueDate: newDueDate, content: content.value, today })
+    submitEmit('emit-submit', { dueDate: dueDate.value, content: content.value, today })
     dueDate.value = null
     content.value = ''
 }
@@ -67,8 +65,10 @@ function formatDate(date: Date): string {
     right: 25%;
     top: 75px;
     padding-bottom: 32.5px;
+    border: 1px solid $third-color;
     border-radius: $radius;
     background-color: $third-color;
+    z-index: 9;
 }
 
 .modal_close-button {
@@ -138,6 +138,7 @@ function formatDate(date: Date): string {
 
 .modal_text-box {
     padding: $medium-all;
+    border-radius: $radius;
     border: none;
     background-color: $fourth-color;
     font-family: inherit;

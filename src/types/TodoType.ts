@@ -11,7 +11,6 @@ export interface TodoIndex {
     id: number
     text: string
     type: SelectedTodos
-    selected: boolean
 }
 
 export enum SelectedTodos {

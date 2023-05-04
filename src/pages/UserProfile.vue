@@ -12,13 +12,19 @@
               @click="openTodoModal"
             />
         </div>
-        <TodoModal v-if="todoModal" @emit-closure="closeTodoModal" @emit-submit="submitTodo" />
+        <TodoModal 
+          v-if="todoModal" 
+          @emit-closure="closeTodoModal" 
+          @emit-submit="submitTodo" 
+          :today="today"
+        />
         <TodosComponent 
           v-if="todos && !pending" 
           @emit-delete="deleteTodoItem" 
           @emit-done="submitDone" 
           :todos="todos" 
           :selectedTodos="selectedTodos"
+          :today="today"
         />
         <div class="profile_custom-loader" v-else-if="pending">
             <CustomLoader />
@@ -46,6 +52,7 @@ const todos: Ref<Todo[]> = ref([])
 const selectedTodos: Ref<SelectedTodos> = ref(SelectedTodos.TODAY)
 const todoModal: Ref<boolean> = ref(false)
 const pending: Ref<boolean> = ref(false)
+const today: Date = new Date()
 
 async function retrieveTodos(): Promise<void> {
     await getTodos(selectedTodos.value, route.params.id.toString())
@@ -72,13 +79,13 @@ function selectTodoButton(todoType: SelectedTodos): void {
     selectedTodos.value = todoType
 }
 
-async function submitTodo(todo: { dueDate: Date, content: string, today: Date }): Promise<void> {
+async function submitTodo(todo: { dueDate: Date, content: string }): Promise<void> {
     todoModal.value = false
     const newTodo: Todo = {
         userId: route.params.id.toString(),
         content: todo.content,
         due: todo.dueDate,
-        created: todo.today,
+        created: today,
         done: false
     }
     await postTodo(newTodo)

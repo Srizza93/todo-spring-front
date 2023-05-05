@@ -13,7 +13,10 @@
                 </button>
             </div>
         <div class="settings_logout">
-            <RouterLink class="todo-button selected" to="/">
+            <RouterLink 
+              class="todo-button settings_logout_button selected" 
+              to="/"
+            >
                 Logout
             </RouterLink>
         </div>
@@ -59,8 +62,6 @@ function emitSelect(selected: SelectedTodos): void {
 .settings {
     display: grid;
     grid-template-columns: 33% 33% 33%;
-    flex-direction: row;
-    justify-content: space-between;
     margin-bottom: 50px;
 }
 
@@ -84,5 +85,17 @@ function emitSelect(selected: SelectedTodos): void {
 
 .selected {
     opacity: 1;
+}
+
+@media screen and (max-width: 600px) {
+    
+    .settings {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .settings_logout_button {
+        margin-bottom: 25px;
+    }
 }
 </style>

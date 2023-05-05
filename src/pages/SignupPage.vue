@@ -33,7 +33,7 @@
                 <label class="error" :class="{ 'error-visible': confPasswordError }">Password is not matching</label>
             </section>
             <section>
-                <input class="todo-button" type="submit" value="Signup" />
+                <input class="todo-button signup_form_section_signup" type="submit" value="Signup" />
             </section>
             <section class="login-section">
                 <span>Already have an account? <RouterLink class="todo-link" to="/">Login</RouterLink></span>   
@@ -158,6 +158,10 @@ async function submitForm(): Promise<void> {
     display: flex;
     flex-direction: column;
     color: $primary-color;
+}
+
+.signup_form_section_signup {
+    width: 100%;
 }
 
 .todo-input {

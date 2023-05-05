@@ -5,7 +5,11 @@
         </div>
         <div class="login_main">
             <img class="login_main_logo" src="/check.svg" alt="logo" />
-            <LoginForm @emit-credentials="loginValidation" :login-error="loginError" />
+            <LoginForm 
+              @emit-credentials="loginValidation" 
+              :login-error="loginError" 
+              :pending="pending" 
+            />
         </div>
     </div>
 </template>
@@ -22,8 +26,10 @@ import LoginForm from '../components/LoginForm.vue'
 const usersData: Ref<User | null> = ref(null)
 const router: Router = useRouter()
 const loginError: Ref<string> = ref('')
+const pending: Ref<boolean> = ref(false)
 
 function loginValidation(credentials: any): void {
+    pending.value = true
     getUser(credentials.email, credentials.password).then((user: User) => {
         usersData.value = user
         
@@ -36,6 +42,8 @@ function loginValidation(credentials: any): void {
         setTimeout(() => {
             loginError.value = ''
         }, 5000)
+    }).finally(() => {
+        pending.value = false
     })
 }
 </script>

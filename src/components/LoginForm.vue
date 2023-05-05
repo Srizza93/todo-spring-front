@@ -20,8 +20,14 @@
               Invalid password
             </label>
         </section>
-        <section>
-            <input class="todo-button" type="submit" value="Login" />
+        <section class="form_section form_section-login" >
+            <input 
+              v-if="!pending"
+              class="todo-button form_section-login_login" 
+              type="submit" 
+              value="Login" 
+            />
+            <CustomLoader v-else />
         </section>
     </form>
 </template>
@@ -30,6 +36,7 @@
 import { ref } from 'vue'
 import type { Ref } from 'vue'
 import formValidation from '../services/formValidation'
+import CustomLoader from './CustomLoader.vue'
 
 const {
     emailError,
@@ -40,7 +47,8 @@ const {
 } = formValidation()
 
 defineProps<{
-  loginError: string;
+  loginError: string
+  pending: boolean
 }>();
 
 const email: Ref<string> = ref("")
@@ -67,6 +75,7 @@ function emitCredentials(): void {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     width: fit-content;
     padding: $medium-all;
 }
@@ -76,6 +85,16 @@ function emitCredentials(): void {
     display: flex;
     flex-direction: column;
     margin-bottom: 25px;
+}
+
+.form_section-login {
+    display: flex;
+    align-items: center;
+}
+
+.form_section-login, 
+  .form_section-login_login {
+    width: 100%;
 }
 
 .error {

@@ -32,8 +32,14 @@
                 <input class="todo-input" type="password" v-model="confPassword" />
                 <label class="error" :class="{ 'error-visible': confPasswordError }">Password is not matching</label>
             </section>
-            <section>
-                <input class="todo-button signup_form_section_signup" type="submit" value="Signup" />
+            <section class="signup_form_section-signup">
+                <input
+                  v-if="!pending"
+                  class="todo-button signup_form_section_signup" 
+                  type="submit" 
+                  value="Signup" 
+                />
+                <CustomLoader v-else />
             </section>
             <section class="login-section">
                 <span>Already have an account? <RouterLink class="todo-link" to="/">Login</RouterLink></span>   
@@ -46,8 +52,10 @@
 import formValidation from "../services/formValidation"
 import { signupUser } from "../api/Users"
 import { User } from "../types/UserType";
-import { ref } from "vue";
+import { defineAsyncComponent, ref } from "vue";
 import type { Ref } from "vue";
+
+const CustomLoader = defineAsyncComponent(() => import("../components/CustomLoader.vue"))
 
 const {
     name,
@@ -70,6 +78,8 @@ const {
     resetValues
 } = formValidation()
 
+const pending: Ref<boolean> = ref(false)
+
 async function submitForm(): Promise<void> {
 
     const nameValid: Ref<boolean> = ref(nameValidation(name.value))
@@ -81,6 +91,7 @@ async function submitForm(): Promise<void> {
     if (nameValid.value && surnameValid.value && emailValid.value 
       && passwordValid.value && confPasswordValid.value) {
         try {
+            pending.value = true
             const newUser: User = {
             name: name.value,
             surname: surname.value,
@@ -106,8 +117,9 @@ async function submitForm(): Promise<void> {
                 passwordError.value = true
             }
         } finally {
+            pending.value = false
             setTimeout(() => {
-                resetValues(true)
+                resetValues(false)
             }, 5000)
         }
     } else {
@@ -160,8 +172,15 @@ async function submitForm(): Promise<void> {
     color: $primary-color;
 }
 
+.signup_form_section-signup {
+    display: flex;
+    justify-content: center;
+    height: 50px;
+}
+
 .signup_form_section_signup {
     width: 100%;
+    height: min-content;
 }
 
 .todo-input {

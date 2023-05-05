@@ -5,8 +5,7 @@
         </div>
         <div class="login_main">
             <img class="login_main_logo" src="/check.svg" alt="logo" />
-            <span class="error" :class="{'error-visible': loginError}">Login Failed</span>
-            <LoginForm @emit-credentials="loginValidation" />
+            <LoginForm @emit-credentials="loginValidation" :login-error="loginError" />
         </div>
     </div>
 </template>
@@ -22,23 +21,22 @@ import LoginForm from '../components/LoginForm.vue'
 
 const usersData: Ref<User | null> = ref(null)
 const router: Router = useRouter()
-let loginError: Ref<boolean> = ref(false)
+const loginError: Ref<string> = ref('')
 
-async function loginValidation(credentials: any): Promise<void> {
-    await getUser(credentials.email, credentials.password).then((user: User) => {
+function loginValidation(credentials: any): void {
+    getUser(credentials.email, credentials.password).then((user: User) => {
         usersData.value = user
-    })
-
-    if (usersData.value) {
+        
         router.push({
             path: `/user/${usersData.value.id}`
         })
-    } else {
-        loginError.value = true
+    }).catch((err) => {
+        loginError.value = err.message
+
         setTimeout(() => {
-            loginError.value = false
+            loginError.value = ''
         }, 5000)
-    }
+    })
 }
 </script>
 
@@ -61,15 +59,5 @@ async function loginValidation(credentials: any): Promise<void> {
 .todo-button {
     margin: $medium-all;
     text-decoration: none;
-}
-
-.error {
-    margin-bottom: 50px;
-    opacity: 0;
-    color: $fourth-color;
-}
-
-.error-visible {
-    opacity: 1;
 }
 </style>

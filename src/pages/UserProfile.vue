@@ -37,7 +37,7 @@
 
 <script setup lang="ts">
 import type { Ref } from "vue"
-import { onMounted, ref, watch } from "vue"
+import { defineAsyncComponent, onMounted, ref, watch } from "vue"
 import { Todo, SelectedTodos } from "../types/TodoType"
 import { getTodos, postTodo, putTodo, deleteTodo } from "../api/Todos"
 import type { RouteLocationNormalizedLoaded } from "vue-router"
@@ -45,7 +45,8 @@ import { useRoute } from "vue-router"
 import TodoNav from "../components/userProfile/TodoNav.vue"
 import TodoModal from "../components/userProfile/TodoModal.vue"
 import TodosComponent from "../components/userProfile/TodosComponent.vue"
-import CustomLoader from "../components/CustomLoader.vue"
+
+const CustomLoader = defineAsyncComponent(() => import("../components/CustomLoader.vue"))
 
 const route: RouteLocationNormalizedLoaded = useRoute()
 const todos: Ref<Todo[]> = ref([])
@@ -55,6 +56,7 @@ const pending: Ref<boolean> = ref(false)
 const today: Date = new Date()
 
 async function retrieveTodos(): Promise<void> {
+    pending.value = true
     await getTodos(selectedTodos.value, route.params.id.toString())
       .then((response) => {
         todos.value = response
@@ -107,7 +109,6 @@ onMounted(() => {
 })
 
 watch(() => selectedTodos.value, () => {
-    pending.value = true
     retrieveTodos()
 })
 </script>

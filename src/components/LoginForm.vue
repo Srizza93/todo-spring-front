@@ -33,10 +33,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { defineAsyncComponent, ref } from 'vue'
 import type { Ref } from 'vue'
 import formValidation from '../services/formValidation'
-import CustomLoader from './CustomLoader.vue'
+
+const CustomLoader = defineAsyncComponent(() => import("./CustomLoader.vue"))
 
 const {
     emailError,

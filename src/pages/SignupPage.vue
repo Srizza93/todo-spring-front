@@ -117,15 +117,15 @@ async function submitForm(): Promise<void> {
                 passwordError.value = true
             }
         } finally {
-            pending.value = false
             setTimeout(() => {
-                resetValues(false)
+                resetValues(true)
             }, 5000)
+            pending.value = false
         }
     } else {
         setTimeout(() => {
-                resetValues(false)
-            }, 5000)
+            resetValues(false)
+        }, 5000)
     }
 
 }

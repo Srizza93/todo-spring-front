@@ -7,6 +7,11 @@
                 <span class="success_email">{{ email }}</span>
             </section>
             <section class="signup_form_section">
+                <label>Username</label>
+                <input class="todo-input" type="text" v-model="username" />
+                <label class="error" :class="{ 'error-visible': nameError }">Username is not valid</label>
+            </section>
+            <section class="signup_form_section">
                 <label>Name</label>
                 <input class="todo-input" type="text" v-model="name" />
                 <label class="error" :class="{ 'error-visible': nameError }">Name is not valid</label>
@@ -58,6 +63,7 @@ import type { Ref } from "vue";
 const CustomLoader = defineAsyncComponent(() => import("../components/CustomLoader.vue"))
 
 const {
+    username,
     name,
     surname,
     email,
@@ -70,6 +76,7 @@ const {
     passwordError,
     confPasswordError,
     successfulSignup,
+    usernameValidation,
     nameValidation,
     surnameValidation,
     emailValidation,
@@ -82,25 +89,30 @@ const pending: Ref<boolean> = ref(false)
 
 async function submitForm(): Promise<void> {
 
+    const usernameValid: Ref<boolean> = ref(usernameValidation(username.value))
     const nameValid: Ref<boolean> = ref(nameValidation(name.value))
     const surnameValid: Ref<boolean> = ref(surnameValidation(surname.value))
     const emailValid: Ref<boolean> = ref(emailValidation(email.value))
     const passwordValid: Ref<boolean> = ref(passwordValidation(password.value))
     const confPasswordValid: Ref<boolean> = ref(confPasswordValidation(password.value, confPassword.value))
 
-    if (nameValid.value && surnameValid.value && emailValid.value 
+    if (usernameValid.value && nameValid.value && surnameValid.value && emailValid.value 
       && passwordValid.value && confPasswordValid.value) {
         try {
             pending.value = true
             const newUser: User = {
-            name: name.value,
-            surname: surname.value,
-            email: email.value,
-            password: password.value
-        }
+                username: username.value,
+                name: name.value,
+                surname: surname.value,
+                email: email.value,
+                password: password.value
+            }
             await signupUser(newUser)
             successfulSignup.value = true;
         } catch(error: any) {
+            if (error.message === "The username format is not valid") {
+                nameError.value = true
+            }
             if (error.message === "The name format is not valid") {
                 nameError.value = true
             }

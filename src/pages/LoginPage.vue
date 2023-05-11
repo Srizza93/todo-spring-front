@@ -28,9 +28,14 @@ const router: Router = useRouter()
 const loginError: Ref<string> = ref('')
 const pending: Ref<boolean> = ref(false)
 
-async function loginValidation(credentials: any): Promise<void> {
+interface Credentials {
+    username: string;
+    password: string;
+}
+
+async function loginValidation(credentials: Credentials): Promise<void> {
     pending.value = true
-    await getUser(credentials.email, credentials.password).then((user: User) => {
+    await getUser(credentials.username, credentials.password).then((user: User) => {
         usersData.value = user
         
         router.push({

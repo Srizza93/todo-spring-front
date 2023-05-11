@@ -1,13 +1,13 @@
 <template>
     <form class="form" @submit.prevent="emitCredentials">
         <section class="form_section">
-            <label>Email</label>
-            <input class="todo-input" type="text" v-model="email" />
+            <label>Username</label>
+            <input class="todo-input" type="text" v-model="username" />
             <label 
               class="error" 
-              :class="{'error-visible': loginError === 'Invalid email' || emailError}"
+              :class="{'error-visible': loginError === 'Invalid username' || usernameError}"
             >
-              Invalid email
+              Invalid username
             </label>
         </section>
         <section class="form_section">
@@ -40,9 +40,9 @@ import formValidation from '../services/formValidation'
 const CustomLoader = defineAsyncComponent(() => import("./CustomLoader.vue"))
 
 const {
-    emailError,
+    usernameError,
     passwordError,
-    emailValidation,
+    usernameValidation,
     passwordValidation,
     resetValues
 } = formValidation()
@@ -52,17 +52,17 @@ defineProps<{
   pending: boolean
 }>();
 
-const email: Ref<string> = ref("")
+const username: Ref<string> = ref("")
 const password: Ref<string> = ref("")
 const submitEmit = defineEmits(['emit-credentials'])
 
 function emitCredentials(): void {
-    emailValidation(email.value)
+  usernameValidation(username.value)
     passwordValidation(password.value)
     
-    if (!emailError.value && !passwordError.value) {
+    if (!usernameError.value && !passwordError.value) {
         submitEmit('emit-credentials', 
-        { email: email.value, password: password.value })
+        { username: username.value, password: password.value })
     }
     
     setTimeout(() => {

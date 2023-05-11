@@ -6,11 +6,13 @@ const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s)
 const nameRegex = /^[a-zA-Z]{1,30}$/
 
 export default function() {
+    const username: Ref<string> = ref('')
     const name: Ref<string> = ref('')
     const surname: Ref<string> = ref('')
     const email: Ref<string> = ref('')
     const password: Ref<string> = ref('')
     const confPassword: Ref<string> = ref('')
+    const usernameError: Ref<boolean> = ref(false)
     const nameError: Ref<boolean> = ref(false)
     const surnameError: Ref<boolean> = ref(false)
     const emailError: Ref<boolean> = ref(false)
@@ -18,6 +20,14 @@ export default function() {
     const passwordError: Ref<boolean> = ref(false)
     const confPasswordError: Ref<boolean> = ref(false)
     const successfulSignup: Ref<boolean> = ref(false)
+
+    function usernameValidation(username: string): boolean {
+        if (!username || !nameRegex.test(username)) {
+            usernameError.value = true
+            return false
+        }
+        return true
+    }
 
     function nameValidation(name: string): boolean {
         if (!name || !nameRegex.test(name)) {
@@ -61,12 +71,14 @@ export default function() {
 
     function resetValues(allValues: boolean): void {
         if (allValues) {
+            username.value = ''
             name.value = ''
             surname.value = ''
             email.value = ''
             password.value = ''
             confPassword.value = ''
         }
+        usernameError.value = false
         nameError.value = false
         surnameError.value = false
         emailError.value = false
@@ -77,11 +89,13 @@ export default function() {
     }
 
     return {
+        username,
         name,
         surname,
         email,
         password,
         confPassword,
+        usernameError,
         nameError,
         surnameError,
         emailError,
@@ -89,6 +103,7 @@ export default function() {
         passwordError,
         confPasswordError,
         successfulSignup,
+        usernameValidation,
         nameValidation,
         surnameValidation,
         emailValidation,

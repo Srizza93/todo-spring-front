@@ -19,10 +19,12 @@ import { ref } from 'vue'
 import type { Ref } from 'vue'
 import { useRouter } from 'vue-router'
 import type { Router } from 'vue-router'
+import { useStateUserStore } from '../store/StateUser'
 import { getUser } from '../api/Users'
 import type { User } from '../types/UserType'
 import LoginForm from '../components/LoginForm.vue'
 
+const store = useStateUserStore()
 const usersData: Ref<User | null> = ref(null)
 const router: Router = useRouter()
 const loginError: Ref<string> = ref('')
@@ -35,8 +37,15 @@ interface Credentials {
 
 async function loginValidation(credentials: Credentials): Promise<void> {
     pending.value = true
+    
     await getUser(credentials.username, credentials.password).then((user: User) => {
         usersData.value = user
+        const token: string | undefined = usersData.value.accessToken
+        
+        if (token) {
+            store.updateToken(token)
+            store.setUserStatus(true)
+        }
         
         router.push({
             path: `/user/${usersData.value.id}`

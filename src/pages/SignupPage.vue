@@ -111,8 +111,8 @@ async function submitForm(): Promise<void> {
             await signupUser(newUser)
             successfulSignup.value = true;
         } catch(error: any) {
-            if (error.message === "The username format is not valid") {
-                nameError.value = true
+            if (error.message === "This username has been used already") {
+                usernameError.value = true
             }
             if (error.message === "The name format is not valid") {
                 nameError.value = true

@@ -12,5 +12,6 @@ export const useStateUserStore = defineStore('stateUser', {
         setUserStatus(status: boolean): void {
             this.loggedIn = status
         } 
-    }
+    },
+    persist: true
 })

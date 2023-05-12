@@ -15,6 +15,7 @@
         <div class="settings_logout">
             <RouterLink 
               class="todo-button settings_logout_button selected" 
+              @click="logOut"
               to="/"
             >
                 Logout
@@ -26,6 +27,7 @@
 <script lang="ts" setup>
 import type { Ref } from "vue"
 import { ref } from "vue"
+import { useStateUserStore } from '../../store/StateUser'
 import type { TodoIndex } from "../../types/TodoType"
 import { SelectedTodos } from "../../types/TodoType"
 
@@ -55,6 +57,12 @@ const submitEmit = defineEmits(['emit-select'])
 
 function emitSelect(selected: SelectedTodos): void {
     submitEmit('emit-select', selected)
+}
+
+function logOut(): void {
+    const store = useStateUserStore()
+    store.setUserStatus(false)
+    store.updateToken('')
 }
 </script>
 

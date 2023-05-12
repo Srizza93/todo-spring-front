@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { useStateUserStore } from '../store/StateUser'
 
 const routeOptions = [
   {
@@ -44,14 +45,15 @@ const router = createRouter({
   routes,
 });
 
-// router.beforeEach((to, from) => {
-//   if (to.meta.requiresAuth) {
-//     return {
-//       path: '/login',
-//       query: { redirect: to.fullPath },
-//     }
-//   }
-// })
+router.beforeEach((to, from) => {
+  const store = useStateUserStore()
+  if (to.meta.requiresAuth && !store.$state.loggedIn) {
+    return {
+      path: '/login',
+      query: { redirect: to.fullPath },
+    }
+  }
+})
 
 export default router;
 

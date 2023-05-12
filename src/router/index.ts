@@ -17,7 +17,7 @@ const routeOptions = [
     }
   },
   {
-    path: '/user/:id',
+    path: '/user',
     name: 'UserProfile',
     meta: {
       requiresAuth: true

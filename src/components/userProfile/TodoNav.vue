@@ -63,6 +63,7 @@ function logOut(): void {
     const store = useStateUserStore()
     store.setUserStatus(false)
     store.updateToken('')
+    store.updateUserId('')
 }
 </script>
 

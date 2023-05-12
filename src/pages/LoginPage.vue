@@ -41,14 +41,16 @@ async function loginValidation(credentials: Credentials): Promise<void> {
     await getUser(credentials.username, credentials.password).then((user: User) => {
         usersData.value = user
         const token: string | undefined = usersData.value.accessToken
+        const userId: string | undefined = usersData.value.id
         
-        if (token) {
+        if (token && userId) {
             store.updateToken(token)
+            store.updateUserId(userId)
             store.setUserStatus(true)
         }
         
         router.push({
-            path: `/user/${usersData.value.id}`
+            path: `/user`
         })
     }).catch((err) => {
         loginError.value = err.message

@@ -38,17 +38,17 @@
 <script setup lang="ts">
 import type { Ref } from "vue"
 import { defineAsyncComponent, onMounted, ref, watch } from "vue"
+import { useStateUserStore } from '../store/StateUser'
 import { Todo, SelectedTodos } from "../types/TodoType"
 import { getTodos, postTodo, putTodo, deleteTodo } from "../api/Todos"
-import type { RouteLocationNormalizedLoaded } from "vue-router"
-import { useRoute } from "vue-router"
 import TodoNav from "../components/userProfile/TodoNav.vue"
 import TodoModal from "../components/userProfile/TodoModal.vue"
 import TodosComponent from "../components/userProfile/TodosComponent.vue"
 
 const CustomLoader = defineAsyncComponent(() => import("../components/CustomLoader.vue"))
 
-const route: RouteLocationNormalizedLoaded = useRoute()
+const store = useStateUserStore()
+const userId = store.userId
 const todos: Ref<Todo[]> = ref([])
 const selectedTodos: Ref<SelectedTodos> = ref(SelectedTodos.TODAY)
 const todoModal: Ref<boolean> = ref(false)
@@ -57,7 +57,8 @@ const today: Date = new Date()
 
 async function retrieveTodos(): Promise<void> {
     pending.value = true
-    await getTodos(selectedTodos.value, route.params.id.toString())
+    
+    await getTodos(selectedTodos.value, userId)
       .then((response) => {
         todos.value = response
       })
@@ -84,7 +85,7 @@ function selectTodoButton(todoType: SelectedTodos): void {
 async function submitTodo(todo: { dueDate: Date, content: string }): Promise<void> {
     todoModal.value = false
     const newTodo: Todo = {
-        userId: route.params.id.toString(),
+        userId: userId,
         content: todo.content,
         due: todo.dueDate,
         created: today,

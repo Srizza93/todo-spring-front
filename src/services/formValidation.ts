@@ -3,6 +3,7 @@ import type { Ref } from "vue"
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,}$/
+const usernameRegex = /^[a-zA-Z0-9]{3,30}$/
 const nameRegex = /^[a-zA-Z]{1,30}$/
 
 export default function() {
@@ -22,7 +23,7 @@ export default function() {
     const successfulSignup: Ref<boolean> = ref(false)
 
     function usernameValidation(username: string): boolean {
-        if (!username || !nameRegex.test(username)) {
+        if (!username || !usernameRegex.test(username)) {
             usernameError.value = true
             return false
         }

@@ -9,7 +9,7 @@
             <section class="signup_form_section">
                 <label>Username</label>
                 <input class="todo-input" type="text" v-model="username" />
-                <label class="error" :class="{ 'error-visible': nameError }">Username is not valid</label>
+                <label class="error" :class="{ 'error-visible': usernameError }">Username is not valid</label>
             </section>
             <section class="signup_form_section">
                 <label>Name</label>
@@ -69,6 +69,7 @@ const {
     email,
     password,
     confPassword,
+    usernameError,
     nameError,
     surnameError,
     emailError,

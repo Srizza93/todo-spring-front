@@ -43,6 +43,7 @@ import { formatDate } from "../../services/formatDate"
 const props = defineProps<{
   todos: Todo[];
   selectedTodos: SelectedTodos;
+  today: Date;
 }>();
 
 const submitEmit = defineEmits(['emit-delete', 'emit-done'])
@@ -62,8 +63,8 @@ function emitDone(todo: Todo, done: boolean): void {
 function isTodoExpired(todo: Todo): boolean {
     if (todo.due && props.selectedTodos !== 'DONE') {
         const dueTime: number = new Date(formatDate(todo.due)).getTime()
-        const createdTime: number = new Date(formatDate(todo.created)).getTime()
-        if(dueTime < createdTime) {
+        const formatToday: number = new Date(formatDate(props.today)).getTime()
+        if(dueTime < formatToday) {
             return true
         }
     } 

@@ -5,8 +5,11 @@
         </div>
         <div class="login_main">
             <img class="login_main_logo" src="/check.svg" alt="logo" />
-            <span class="error" :class="{'error-visible': loginError}">Login Failed</span>
-            <LoginForm @emit-credentials="loginValidation" />
+            <LoginForm 
+              @emit-credentials="loginValidation" 
+              :login-error="loginError" 
+              :pending="pending" 
+            />
         </div>
     </div>
 </template>
@@ -16,29 +19,48 @@ import { ref } from 'vue'
 import type { Ref } from 'vue'
 import { useRouter } from 'vue-router'
 import type { Router } from 'vue-router'
+import { useStateUserStore } from '../store/StateUser'
 import { getUser } from '../api/Users'
 import type { User } from '../types/UserType'
 import LoginForm from '../components/LoginForm.vue'
 
+const store = useStateUserStore()
 const usersData: Ref<User | null> = ref(null)
 const router: Router = useRouter()
-let loginError: Ref<boolean> = ref(false)
+const loginError: Ref<string> = ref('')
+const pending: Ref<boolean> = ref(false)
 
-async function loginValidation(credentials: any): Promise<void> {
-    await getUser(credentials.email, credentials.password).then((user: User) => {
+interface Credentials {
+    username: string;
+    password: string;
+}
+
+async function loginValidation(credentials: Credentials): Promise<void> {
+    pending.value = true
+    
+    await getUser(credentials.username, credentials.password).then((user: User) => {
         usersData.value = user
-    })
-
-    if (usersData.value) {
+        const token: string | undefined = usersData.value.accessToken
+        const userId: string | undefined = usersData.value.id
+        
+        if (token && userId) {
+            store.updateToken(token)
+            store.updateUserId(userId)
+            store.setUserStatus(true)
+        }
+        
         router.push({
-            path: `/user/${usersData.value.id}`
+            path: `/user`
         })
-    } else {
-        loginError.value = true
+    }).catch((err) => {
+        loginError.value = err.message
+
         setTimeout(() => {
-            loginError.value = false
+            loginError.value = ''
         }, 5000)
-    }
+    }).finally(() => {
+        pending.value = false
+    })
 }
 </script>
 
@@ -61,15 +83,5 @@ async function loginValidation(credentials: any): Promise<void> {
 .todo-button {
     margin: $medium-all;
     text-decoration: none;
-}
-
-.error {
-    margin-bottom: 50px;
-    opacity: 0;
-    color: $fourth-color;
-}
-
-.error-visible {
-    opacity: 1;
 }
 </style>

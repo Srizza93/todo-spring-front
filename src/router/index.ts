@@ -1,17 +1,34 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { useStateUserStore } from '../store/StateUser'
 
 const routeOptions = [
   {
-    path: '/',
+    path: '/login',
     name: 'LoginPage',
+    meta: {
+      requiresAuth: false
+    }
   },
   {
     path: '/signup',
     name: 'SignupPage',
+    meta: {
+      requiresAuth: false
+    }
   },
   {
-    path: '/user/:id',
+    path: '/user',
     name: 'UserProfile',
+    meta: {
+      requiresAuth: true
+    }
+  },
+  { 
+    path: '/:pathMatch(.*)*', 
+    name: 'LoginPage',
+    meta: {
+      requiresAuth: false
+    }
   },
 ];
 
@@ -24,9 +41,19 @@ const routes = routeOptions.map((route) => {
 });
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 });
+
+router.beforeEach((to, from) => {
+  const store = useStateUserStore()
+  if (to.meta.requiresAuth && !store.$state.loggedIn) {
+    return {
+      path: '/login',
+      query: { redirect: to.fullPath },
+    }
+  }
+})
 
 export default router;
 

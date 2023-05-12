@@ -32,10 +32,13 @@
 import type { Ref } from "vue"
 import { ref } from "vue"
 
+defineProps<{
+  today: Date;
+}>();
+
 const submitEmit = defineEmits(['emit-closure', 'emit-submit'])
 const dueDate: Ref<Date | null> = ref(null)
 const content: Ref<string> = ref("")
-const today: Date = new Date()
   
 
 function emitClosure(): void {
@@ -43,7 +46,7 @@ function emitClosure(): void {
 }
 
 function emitSubmit(): void {
-    submitEmit('emit-submit', { dueDate: dueDate.value, content: content.value, today })
+    submitEmit('emit-submit', { dueDate: dueDate.value, content: content.value })
     dueDate.value = null
     content.value = ''
 }

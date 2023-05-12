@@ -7,6 +7,11 @@
                 <span class="success_email">{{ email }}</span>
             </section>
             <section class="signup_form_section">
+                <label>Username</label>
+                <input class="todo-input" type="text" v-model="username" />
+                <label class="error" :class="{ 'error-visible': usernameError }">Username is not valid</label>
+            </section>
+            <section class="signup_form_section">
                 <label>Name</label>
                 <input class="todo-input" type="text" v-model="name" />
                 <label class="error" :class="{ 'error-visible': nameError }">Name is not valid</label>
@@ -32,8 +37,14 @@
                 <input class="todo-input" type="password" v-model="confPassword" />
                 <label class="error" :class="{ 'error-visible': confPasswordError }">Password is not matching</label>
             </section>
-            <section>
-                <input class="todo-button" type="submit" value="Signup" />
+            <section class="signup_form_section-signup">
+                <input
+                  v-if="!pending"
+                  class="todo-button signup_form_section_signup" 
+                  type="submit" 
+                  value="Signup" 
+                />
+                <CustomLoader v-else />
             </section>
             <section class="login-section">
                 <span>Already have an account? <RouterLink class="todo-link" to="/">Login</RouterLink></span>   
@@ -46,15 +57,19 @@
 import formValidation from "../services/formValidation"
 import { signupUser } from "../api/Users"
 import { User } from "../types/UserType";
-import { ref } from "vue";
+import { defineAsyncComponent, ref } from "vue";
 import type { Ref } from "vue";
 
+const CustomLoader = defineAsyncComponent(() => import("../components/CustomLoader.vue"))
+
 const {
+    username,
     name,
     surname,
     email,
     password,
     confPassword,
+    usernameError,
     nameError,
     surnameError,
     emailError,
@@ -62,6 +77,7 @@ const {
     passwordError,
     confPasswordError,
     successfulSignup,
+    usernameValidation,
     nameValidation,
     surnameValidation,
     emailValidation,
@@ -70,26 +86,34 @@ const {
     resetValues
 } = formValidation()
 
+const pending: Ref<boolean> = ref(false)
+
 async function submitForm(): Promise<void> {
 
+    const usernameValid: Ref<boolean> = ref(usernameValidation(username.value))
     const nameValid: Ref<boolean> = ref(nameValidation(name.value))
     const surnameValid: Ref<boolean> = ref(surnameValidation(surname.value))
     const emailValid: Ref<boolean> = ref(emailValidation(email.value))
     const passwordValid: Ref<boolean> = ref(passwordValidation(password.value))
     const confPasswordValid: Ref<boolean> = ref(confPasswordValidation(password.value, confPassword.value))
 
-    if (nameValid.value && surnameValid.value && emailValid.value 
+    if (usernameValid.value && nameValid.value && surnameValid.value && emailValid.value 
       && passwordValid.value && confPasswordValid.value) {
         try {
+            pending.value = true
             const newUser: User = {
-            name: name.value,
-            surname: surname.value,
-            email: email.value,
-            password: password.value
-        }
+                username: username.value,
+                name: name.value,
+                surname: surname.value,
+                email: email.value,
+                password: password.value
+            }
             await signupUser(newUser)
             successfulSignup.value = true;
         } catch(error: any) {
+            if (error.message === "This username has been used already") {
+                usernameError.value = true
+            }
             if (error.message === "The name format is not valid") {
                 nameError.value = true
             }
@@ -109,11 +133,12 @@ async function submitForm(): Promise<void> {
             setTimeout(() => {
                 resetValues(true)
             }, 5000)
+            pending.value = false
         }
     } else {
         setTimeout(() => {
-                resetValues(false)
-            }, 5000)
+            resetValues(false)
+        }, 5000)
     }
 
 }
@@ -158,6 +183,17 @@ async function submitForm(): Promise<void> {
     display: flex;
     flex-direction: column;
     color: $primary-color;
+}
+
+.signup_form_section-signup {
+    display: flex;
+    justify-content: center;
+    height: 50px;
+}
+
+.signup_form_section_signup {
+    width: 100%;
+    height: min-content;
 }
 
 .todo-input {

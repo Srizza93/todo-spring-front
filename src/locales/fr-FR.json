@@ -32,5 +32,10 @@
         "add": "Ajouter",
         "modalPlaceholder": "Écrivez une tâche à faire...",
         "noTodos": "Il n'y a pas de tâches ici"
+    },
+    "langs": {
+        "en": "Anglais",
+        "fr": "Français",
+        "it": "Italian"
     }
 }

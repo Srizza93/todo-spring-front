@@ -32,5 +32,10 @@
         "add": "Add",
         "modalPlaceholder": "Write a todo...",
         "noTodos": "There are no todos here"
+    },
+    "langs": {
+        "en": "English",
+        "fr": "French",
+        "it": "Italian"
     }
 }

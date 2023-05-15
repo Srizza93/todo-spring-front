@@ -1,20 +1,34 @@
 <template>
     <form class="form" @submit.prevent="emitCredentials">
         <section class="form_section">
-            <label>{{ t('forms.username') }}</label>
-            <input class="todo-input" type="text" v-model="username" />
-            <label 
-              class="error" 
+            <label for="uname">{{ t('forms.username') }}</label>
+            <input 
+              class="todo-input" 
+              type="text"
+              name="uname"
+              autocomplete="username"
+              v-model="username" 
+            />
+            <label
+              class="error"
+              for="uname"
               :class="{'error-visible': loginError === 'Invalid username' || usernameError}"
             >
             {{ t('forms.error') }} {{ t('forms.username') }}
             </label>
         </section>
         <section class="form_section">
-            <label>{{ t('forms.password') }}</label>
-            <input class="todo-input" type="password" v-model="password" />
-            <label 
-              class="error" 
+            <label for="pword">{{ t('forms.password') }}</label>
+            <input 
+              class="todo-input"
+              name="pword"
+              type="password"
+              autocomplete="current-password"
+              v-model="password" 
+            />
+            <label
+              class="error"
+              for="pword"
               :class="{'error-visible': loginError === 'Invalid password' || passwordError}"
             >
             {{ t('forms.error') }} {{ t('forms.password') }}

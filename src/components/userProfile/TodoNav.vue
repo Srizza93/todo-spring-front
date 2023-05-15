@@ -9,7 +9,7 @@
                     :class="{ selected: selectedTodos === todoButton.type}"
                     @click="emitSelect(todoButton.type)"
                     >
-                    {{ todoButton.text }}
+                    {{ t(`userProfile.${todoButton.text}`) }}
                 </button>
             </div>
         <div class="settings_logout">
@@ -18,7 +18,7 @@
               @click="logOut"
               to="/"
             >
-                Logout
+                {{ t('processes.logout') }}
             </RouterLink>
         </div>
         </div>
@@ -27,6 +27,7 @@
 <script lang="ts" setup>
 import type { Ref } from "vue"
 import { ref } from "vue"
+import { useI18n } from 'vue-i18n'
 import { useStateUserStore } from '../../store/StateUser'
 import type { TodoIndex } from "../../types/TodoType"
 import { SelectedTodos } from "../../types/TodoType"
@@ -35,20 +36,21 @@ defineProps<{
   selectedTodos: SelectedTodos;
 }>();
 
+const { t } = useI18n()
 const todoButtons: Ref<TodoIndex[]> = ref([
     {
         id: 1,
-        text: 'Today',
+        text: 'today',
         type: SelectedTodos.TODAY,
     },
     {
         id: 2,
-        text: 'Inbox',
+        text: 'inbox',
         type: SelectedTodos.INBOX,
     },
     {
         id: 3,
-        text: 'Done',
+        text: 'done',
         type: SelectedTodos.DONE,
     },
 ])
@@ -70,15 +72,13 @@ function logOut(): void {
 <style lang="scss" scoped>
 .settings {
     display: grid;
-    grid-template-columns: 33% 33% 33%;
+    grid-template-columns: 25% 50% 25%;
     margin-bottom: 50px;
 }
 
 .settings_buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
 }
 
 .settings_logout {

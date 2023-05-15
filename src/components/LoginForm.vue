@@ -1,23 +1,23 @@
 <template>
     <form class="form" @submit.prevent="emitCredentials">
         <section class="form_section">
-            <label>Username</label>
+            <label>{{ t('forms.username') }}</label>
             <input class="todo-input" type="text" v-model="username" />
             <label 
               class="error" 
               :class="{'error-visible': loginError === 'Invalid username' || usernameError}"
             >
-              Invalid username
+            {{ t('forms.error') }} {{ t('forms.username') }}
             </label>
         </section>
         <section class="form_section">
-            <label>Password</label>
+            <label>{{ t('forms.password') }}</label>
             <input class="todo-input" type="password" v-model="password" />
             <label 
               class="error" 
               :class="{'error-visible': loginError === 'Invalid password' || passwordError}"
             >
-              Invalid password
+            {{ t('forms.error') }} {{ t('forms.password') }}
             </label>
         </section>
         <section class="form_section form_section-login" >
@@ -25,7 +25,7 @@
               v-if="!pending"
               class="todo-button form_section-login_login" 
               type="submit" 
-              value="Login" 
+              :value="t('processes.login')" 
             />
             <CustomLoader v-else />
         </section>
@@ -35,10 +35,12 @@
 <script setup lang="ts">
 import { defineAsyncComponent, ref } from 'vue'
 import type { Ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import formValidation from '../services/formValidation'
 
 const CustomLoader = defineAsyncComponent(() => import("./CustomLoader.vue"))
 
+const { t } = useI18n() 
 const {
     usernameError,
     passwordError,

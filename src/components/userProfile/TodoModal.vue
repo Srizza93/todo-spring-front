@@ -19,23 +19,25 @@
           v-model="content"
           maxlength="100"
           rows="4"
-          placeholder="Write a todo..."
+          :placeholder="t('userProfile.modalPlaceholder')"
           autofocus
           contenteditable
           @keyup.enter="emitSubmit"
         ></textarea>
-        <input class="todo-button" type="submit" value="Add" />
+        <input class="todo-button" type="submit" :value="t('userProfile.add')" />
     </form>
 </template>
 
 <script lang="ts" setup>
 import type { Ref } from "vue"
 import { ref } from "vue"
+import { useI18n } from 'vue-i18n'
 
 defineProps<{
   today: Date;
 }>();
 
+const { t } = useI18n()
 const submitEmit = defineEmits(['emit-closure', 'emit-submit'])
 const dueDate: Ref<Date | null> = ref(null)
 const content: Ref<string> = ref("")

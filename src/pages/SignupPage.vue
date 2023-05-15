@@ -2,58 +2,59 @@
     <div class="signup">
         <form class="signup_form" @submit.prevent="submitForm">
             <section class="signup_form_section success" :class="{ 'success-visible': successfulSignup}">
-                <span>Signup successful!</span>
-                <span>We have sent an email to</span>
+                <span>{{ t('forms.success.line1') }}</span>
+                <span>{{ t('forms.success.line2') }}</span>
                 <span class="success_email">{{ email }}</span>
             </section>
             <section class="signup_form_section">
-                <label>Username</label>
+                <label>{{ t('forms.username') }}</label>
                 <input class="todo-input" type="text" v-model="username" />
-                <label class="error" :class="{ 'error-visible': usernameError }">Username is not valid</label>
+                <label class="error" :class="{ 'error-visible': usernameError }">{{ t('forms.error') }} {{ t('forms.username') }}</label>
             </section>
             <section class="signup_form_section">
-                <label>Name</label>
+                <label>{{ t('forms.name') }}</label>
                 <input class="todo-input" type="text" v-model="name" />
-                <label class="error" :class="{ 'error-visible': nameError }">Name is not valid</label>
+                <label class="error" :class="{ 'error-visible': nameError }">{{ t('forms.error') }} {{ t('forms.name') }}</label>
             </section>
             <section class="signup_form_section">
-                <label>Surname</label>
+                <label>{{ t('forms.surname') }}</label>
                 <input class="todo-input" type="text" v-model="surname" />
-                <label class="error" :class="{ 'error-visible': surnameError }">Surname is not valid</label>
+                <label class="error" :class="{ 'error-visible': surnameError }">{{ t('forms.error') }} {{ t('forms.surname') }}</label>
             </section>
             <section class="signup_form_section">
-                <label>Email</label>
+                <label>{{ t('forms.email') }}</label>
                 <input class="todo-input" type="email" v-model="email" />
-                <label v-if="emailError" class="error" :class="{ 'error-visible': emailError }">Email is not valid</label>
-                <label v-else class="error" :class="{ 'error-visible': emailUsed }">Email has been used already</label>
+                <label v-if="emailError" class="error" :class="{ 'error-visible': emailError }">{{ t('forms.error') }} {{ t('forms.email') }}</label>
+                <label v-else class="error" :class="{ 'error-visible': emailUsed }">{{ t('forms.email') }} {{ t('forms.hasBeenUsed') }}</label>
             </section>
             <section class="signup_form_section">
-                <label>Password</label>
+                <label>{{ t('forms.password') }}</label>
                 <input class="todo-input" type="password" v-model="password" />
-                <label class="error" :class="{ 'error-visible': passwordError }">Password is not valid</label>
+                <label class="error" :class="{ 'error-visible': passwordError }">{{ t('forms.error') }} {{ t('forms.password') }}</label>
             </section>
             <section class="signup_form_section">
-                <label>Confirm Password</label>
+                <label>{{ t('forms.confirmPassword') }}</label>
                 <input class="todo-input" type="password" v-model="confPassword" />
-                <label class="error" :class="{ 'error-visible': confPasswordError }">Password is not matching</label>
+                <label class="error" :class="{ 'error-visible': confPasswordError }">{{ t('forms.confPasswordError') }}</label>
             </section>
             <section class="signup_form_section-signup">
                 <input
                   v-if="!pending"
                   class="todo-button signup_form_section_signup" 
                   type="submit" 
-                  value="Signup" 
+                  :value="t('processes.signup')" 
                 />
                 <CustomLoader v-else />
             </section>
             <section class="login-section">
-                <span>Already have an account? <RouterLink class="todo-link" to="/">Login</RouterLink></span>   
+                <span>{{ t('signupPage.haveAnAccount') }} <RouterLink class="todo-link" to="/">{{ t('processes.login') }}</RouterLink></span>   
             </section>
         </form>
     </div>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import formValidation from "../services/formValidation"
 import { signupUser } from "../api/Users"
 import { User } from "../types/UserType";
@@ -62,6 +63,7 @@ import type { Ref } from "vue";
 
 const CustomLoader = defineAsyncComponent(() => import("../components/CustomLoader.vue"))
 
+const { t } = useI18n()
 const {
     username,
     name,

@@ -1,0 +1,41 @@
+{
+    "forms": {
+        "username": "Nom d'utilisateur",
+        "name": "Nom",
+        "surname": "Prénom",
+        "email": "Email",
+        "password": "Mot de passe",
+        "confirmPassword": "Confirmez le mot de passe",
+        "error": "Invalide",
+        "hasBeenUsed": "a déjà été utilisé",
+        "confPasswordError": "Le mot de passe ne correspond pas",
+        "success": {
+            "line1": "Inscription réussie!",
+            "line2": "Nous avons envoyé un email à"
+        }
+    },
+    "processes": {
+        "login": "Connexion",
+        "signup": "Inscription",
+        "logout": "Déconnexion"
+    },
+    "signupPage": {
+        "haveAnAccount": "Vous avez déjà un compte?"
+    },
+    "userProfile": {
+        "today": "Aujourd'hui",
+        "inbox": "Boîte",
+        "done": "Terminé",
+        "created": "Créé",
+        "due": "Échéance",
+        "expired": "Expiré",
+        "add": "Ajouter",
+        "modalPlaceholder": "Écrivez une tâche à faire...",
+        "noTodos": "Il n'y a pas de tâches ici"
+    },
+    "langs": {
+        "en": "Anglais",
+        "fr": "Français",
+        "it": "Italian"
+    }
+}

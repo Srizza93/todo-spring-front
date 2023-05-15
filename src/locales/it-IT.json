@@ -1,0 +1,41 @@
+{
+    "forms": {
+        "username": "Nome utente",
+        "name": "Nome",
+        "surname": "Cognome",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Conferma Password",
+        "error": "Non valido",
+        "hasBeenUsed": "è già stato utilizzato",
+        "confPasswordError": "La password non corrisponde",
+        "success": {
+            "line1": "Registrazione avvenuta con successo!",
+            "line2": "Abbiamo inviato un'email a"
+        }
+    },
+    "processes": {
+        "login": "Accedi",
+        "signup": "Registrati",
+        "logout": "Esci"
+    },
+    "signupPage": {
+        "haveAnAccount": "Hai già un account?"
+    },
+    "userProfile": {
+        "today": "Oggi",
+        "inbox": "Posta in arrivo",
+        "done": "Fatto",
+        "created": "Creato",
+        "due": "Scadenza",
+        "expired": "Scaduto",
+        "add": "Aggiungi",
+        "modalPlaceholder": "Scrivi un todo...",
+        "noTodos": "Non ci sono todo qui"
+    },
+    "langs": {
+        "en": "Inglese",
+        "fr": "Francese",
+        "it": "Italiano"
+    }
+    }

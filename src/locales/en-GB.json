@@ -1,0 +1,41 @@
+{
+    "forms": {
+        "username": "Username",
+        "name": "Name",
+        "surname": "Surname",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "error": "Invalid",
+        "hasBeenUsed": "has been used already",
+        "confPasswordError": "Password is not matching",
+        "success": {
+            "line1": "Signup successful!",
+            "line2": "We have sent an email to"
+        }
+    },
+    "processes": {
+        "login": "Login",
+        "signup": "Signup",
+        "logout": "Logout"
+    },
+    "signupPage": {
+        "haveAnAccount": "Already have an account?"
+    },
+    "userProfile": {
+        "today": "Today",
+        "inbox": "Inbox",
+        "done": "Done",
+        "created": "Created",
+        "due": "Due",
+        "expired": "Expired",
+        "add": "Add",
+        "modalPlaceholder": "Write a todo...",
+        "noTodos": "There are no todos here"
+    },
+    "langs": {
+        "en": "English",
+        "fr": "French",
+        "it": "Italian"
+    }
+}

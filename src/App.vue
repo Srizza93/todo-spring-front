@@ -16,7 +16,7 @@ const store = useStateUserStore()
 
 function setLanguage(setLang?: string): void {
     const storedLang: string = store.language
-    const lang: string = setLang ? setLang : !storedLang ? window.navigator.language : storedLang
+    const lang: string = setLang ? setLang : storedLang ? storedLang : window.navigator.language
     locale.value = convertLanguage(lang)
     store.updateLanguage(lang)
 }

@@ -17,6 +17,9 @@ html, body {
 }
 
 .todo-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: $small-all;
     border: none;
     border-radius: $radius;

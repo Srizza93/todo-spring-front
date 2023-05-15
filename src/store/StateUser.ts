@@ -4,7 +4,8 @@ export const useStateUserStore = defineStore('stateUser', {
     state: () => ({
         token: '' as string,
         userId: '' as string,
-        loggedIn: false as boolean
+        loggedIn: false as boolean,
+        language: '' as string
     }),
     actions: {
         updateToken(newToken: string): void {
@@ -13,6 +14,9 @@ export const useStateUserStore = defineStore('stateUser', {
         updateUserId(newId: string): void {
             this.userId = newId
         }, 
+        updateLanguage(newLang: string): void {
+            this.language = newLang
+        },
         setUserStatus(status: boolean): void {
             this.loggedIn = status
         } 

@@ -51,6 +51,10 @@ html, body {
     background-color: transparent;
 }
 
+.todo-input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px $fourth-color inset;
+}
+
 .todo-input:focus {
     outline: none;
 }
@@ -60,6 +64,7 @@ html, body {
     opacity: 0;
     color: $fourth-color;
     font-size: 14px;
+    transition: 1.5s;
 }
 
 .error-visible {

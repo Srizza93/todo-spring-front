@@ -9,28 +9,28 @@
             <section class="signup_form_section">
                 <label>{{ t('forms.username') }}</label>
                 <input class="todo-input" type="text" v-model="username" />
-                <label class="error" :class="{ 'error-visible': usernameError }">{{ t('forms.error') }} {{ t('forms.username') }}</label>
+                <label class="error" :class="{ 'error-visible': usernameError }">{{ t('forms.username') }} {{ t('forms.error') }}</label>
             </section>
             <section class="signup_form_section">
                 <label>{{ t('forms.name') }}</label>
                 <input class="todo-input" type="text" v-model="name" />
-                <label class="error" :class="{ 'error-visible': nameError }">{{ t('forms.error') }} {{ t('forms.name') }}</label>
+                <label class="error" :class="{ 'error-visible': nameError }">{{ t('forms.name') }} {{ t('forms.error') }}</label>
             </section>
             <section class="signup_form_section">
                 <label>{{ t('forms.surname') }}</label>
                 <input class="todo-input" type="text" v-model="surname" />
-                <label class="error" :class="{ 'error-visible': surnameError }">{{ t('forms.error') }} {{ t('forms.surname') }}</label>
+                <label class="error" :class="{ 'error-visible': surnameError }">{{ t('forms.surname') }} {{ t('forms.error') }}</label>
             </section>
             <section class="signup_form_section">
                 <label>{{ t('forms.email') }}</label>
                 <input class="todo-input" type="email" v-model="email" />
-                <label v-if="emailError" class="error" :class="{ 'error-visible': emailError }">{{ t('forms.error') }} {{ t('forms.email') }}</label>
+                <label v-if="emailError" class="error" :class="{ 'error-visible': emailError }">{{ t('forms.email') }} {{ t('forms.error') }}</label>
                 <label v-else class="error" :class="{ 'error-visible': emailUsed }">{{ t('forms.email') }} {{ t('forms.hasBeenUsed') }}</label>
             </section>
             <section class="signup_form_section">
                 <label>{{ t('forms.password') }}</label>
                 <input class="todo-input" type="password" v-model="password" />
-                <label class="error" :class="{ 'error-visible': passwordError }">{{ t('forms.error') }} {{ t('forms.password') }}</label>
+                <label class="error" :class="{ 'error-visible': passwordError }">{{ t('forms.password') }} {{ t('forms.error') }}</label>
             </section>
             <section class="signup_form_section">
                 <label>{{ t('forms.confirmPassword') }}</label>
@@ -215,7 +215,6 @@ async function submitForm(): Promise<void> {
 
 .error {
     color: $third-color;
-    transition: 1.5s;
 }
 
 .login-section {

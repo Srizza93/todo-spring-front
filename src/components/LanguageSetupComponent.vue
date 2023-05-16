@@ -11,10 +11,10 @@
             <li 
               class="langs-modal_ul_lang"
               v-for="lang in langs"
-              :key="lang.type"
-              @click="emitSelect(lang.type)"
+              :key="lang"
+              @click="emitSelect(lang)"
             >
-              {{ t(`langs.${lang.type}`) }}
+              {{ $t(`langs.${lang}`) }}
             </li>
         </ul>
     </div>
@@ -23,10 +23,8 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import type { Ref } from 'vue'
-import { useI18n } from 'vue-i18n'
 import languageSetupFuncts from '../services/languageSetupFuncts'
 
-const { t } = useI18n()
 const { langs } = languageSetupFuncts()
 
 const submitEmit = defineEmits(['emit-select'])

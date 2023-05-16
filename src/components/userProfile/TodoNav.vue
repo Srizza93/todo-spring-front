@@ -9,7 +9,7 @@
                     :class="{ selected: selectedTodos === todoButton.type}"
                     @click="emitSelect(todoButton.type)"
                     >
-                    {{ t(`userProfile.${todoButton.text}`) }}
+                    {{ $t(`userProfile.${todoButton.text}`) }}
                 </button>
             </div>
         <div class="settings_logout">
@@ -18,7 +18,7 @@
               @click="logOut"
               to="/"
             >
-                {{ t('processes.logout') }}
+                {{ $t('processes.logout') }}
             </RouterLink>
         </div>
         </div>
@@ -36,7 +36,6 @@ defineProps<{
   selectedTodos: SelectedTodos;
 }>();
 
-const { t } = useI18n()
 const todoButtons: Ref<TodoIndex[]> = ref([
     {
         id: 1,

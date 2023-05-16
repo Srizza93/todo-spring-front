@@ -2,8 +2,8 @@
     <div class="todos">
         <div class="todos_todo" v-for="todo in todos" :key="todo.id" :class="{ 'todo-expired': isTodoExpired(todo)}">
             <span v-if="todo.due" class="todos_todo_due">
-                <b v-if="!isTodoExpired(todo)">{{ t('userProfile.due') }}:</b>
-                <b v-else>{{ t('userProfile.expired') }}:</b>
+                <b v-if="!isTodoExpired(todo)">{{ $t('userProfile.due') }}:</b>
+                <b v-else>{{ $t('userProfile.expired') }}:</b>
                  {{ formatDate(todo.due) }}
             </span>
             <div class="todos_todo_middle">
@@ -31,7 +31,7 @@
                     />
                 </div>
             </div>
-            <span class="todos_todo_created"><b>{{ t('userProfile.created') }}:</b> {{ formatDate(todo.created) }}</span>
+            <span class="todos_todo_created"><b>{{ $t('userProfile.created') }}:</b> {{ formatDate(todo.created) }}</span>
         </div>
     </div>
 </template>

@@ -30,7 +30,7 @@
             <CustomLoader />
         </div>
         <div v-else class="profile_no-todos">
-            <span>{{ t('userProfile.noTodos') }}</span>
+            <span>{{ $t('userProfile.noTodos') }}</span>
         </div>
     </div>
 </template>

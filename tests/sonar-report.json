@@ -1,0 +1,46 @@
+{
+  "numTotalTestSuites": 2,
+  "numPassedTestSuites": 2,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 2,
+  "numPassedTests": 2,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "startTime": 1684268346116,
+  "success": true,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "",
+            "Should setup the language"
+          ],
+          "fullName": " Should setup the language should toggle the modal",
+          "status": "passed",
+          "title": "should toggle the modal",
+          "duration": 145,
+          "failureMessages": []
+        },
+        {
+          "ancestorTitles": [
+            "",
+            "Should setup the language"
+          ],
+          "fullName": " Should setup the language should get the langs",
+          "status": "passed",
+          "title": "should get the langs",
+          "duration": 146,
+          "failureMessages": []
+        }
+      ],
+      "startTime": 1684269613765,
+      "endTime": 1684269614056,
+      "status": "passed",
+      "message": "",
+      "name": "/Users/simonerizza/todo-spring/front/tests/components/LanguageSetupComponent.test.ts"
+    }
+  ]
+}

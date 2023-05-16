@@ -1,7 +1,7 @@
 <template>
     <div class="login">
         <div class="login_signup">
-            <router-link class="todo-button" to="signup" >{{ t('processes.signup') }}</router-link>
+            <router-link class="todo-button" to="signup" >{{ $t('processes.signup') }}</router-link>
         </div>
         <div class="login_main">
             <img class="login_main_logo" src="/check.svg" alt="logo" />

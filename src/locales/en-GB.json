@@ -6,7 +6,7 @@
         "email": "Email",
         "password": "Password",
         "confirmPassword": "Confirm Password",
-        "error": "Invalid",
+        "error": "is not valid",
         "hasBeenUsed": "has been used already",
         "confPasswordError": "Password is not matching",
         "success": {

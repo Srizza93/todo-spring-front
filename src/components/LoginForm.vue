@@ -14,7 +14,7 @@
               for="uname"
               :class="{'error-visible': loginError === 'Invalid username' || usernameError}"
             >
-            {{ t('forms.error') }} {{ t('forms.username') }}
+            {{ t('forms.username') }} {{ t('forms.error') }}
             </label>
         </section>
         <section class="form_section">
@@ -31,7 +31,7 @@
               for="pword"
               :class="{'error-visible': loginError === 'Invalid password' || passwordError}"
             >
-            {{ t('forms.error') }} {{ t('forms.password') }}
+            {{ t('forms.password') }} {{ t('forms.error') }}
             </label>
         </section>
         <section class="form_section form_section-login" >
@@ -118,5 +118,6 @@ function emitCredentials(): void {
     position: absolute;
     left: 0;
     bottom: -22px;
+    white-space: nowrap;
 } 
 </style>

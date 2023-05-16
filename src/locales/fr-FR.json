@@ -6,9 +6,9 @@
         "email": "Email",
         "password": "Mot de passe",
         "confirmPassword": "Confirmez le mot de passe",
-        "error": "Invalide",
+        "error": "incorrect",
         "hasBeenUsed": "a déjà été utilisé",
-        "confPasswordError": "Le mot de passe ne correspond pas",
+        "confPasswordError": "Confirmation invalide",
         "success": {
             "line1": "Inscription réussie!",
             "line2": "Nous avons envoyé un email à"

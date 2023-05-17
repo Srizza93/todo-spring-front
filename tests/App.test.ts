@@ -30,7 +30,7 @@ describe('Should display the app page', () => {
   beforeEach(() => {
     Object.defineProperty(window, 'navigator', {
       value: {
-        language: 'fr'
+        language: 'fr' as string
       },
     })
     setActivePinia(createPinia())

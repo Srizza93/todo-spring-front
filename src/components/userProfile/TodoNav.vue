@@ -27,7 +27,6 @@
 <script lang="ts" setup>
 import type { Ref } from "vue"
 import { ref } from "vue"
-import { useI18n } from 'vue-i18n'
 import { useStateUserStore } from '../../store/StateUser'
 import type { TodoIndex } from "../../types/TodoType"
 import { SelectedTodos } from "../../types/TodoType"

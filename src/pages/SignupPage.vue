@@ -54,7 +54,6 @@
 </template>
 
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
 import formValidation from "../services/formValidation"
 import { signupUser } from "../api/Users"
 import { User } from "../types/UserType";
@@ -63,7 +62,6 @@ import type { Ref } from "vue";
 
 const CustomLoader = defineAsyncComponent(() => import("../components/CustomLoader.vue"))
 
-const { t } = useI18n()
 const {
     username,
     name,

@@ -37,7 +37,6 @@
 </template>
 
 <script lang="ts" setup>
-import { useI18n } from 'vue-i18n'
 import type { SelectedTodos, Todo } from "../../types/TodoType"
 import { formatDate } from "../../services/formatDate"
 
@@ -47,7 +46,6 @@ const props = defineProps<{
   today: Date;
 }>();
 
-const { t } = useI18n()
 const submitEmit = defineEmits(['emit-delete', 'emit-done'])
 
 

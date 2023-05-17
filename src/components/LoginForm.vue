@@ -49,7 +49,6 @@
 <script setup lang="ts">
 import { defineAsyncComponent, ref } from 'vue'
 import type { Ref } from 'vue'
-import { useI18n } from 'vue-i18n'
 import formValidation from '../services/formValidation'
 
 const CustomLoader = defineAsyncComponent(() => import("./CustomLoader.vue"))
@@ -72,7 +71,7 @@ const password: Ref<string> = ref("")
 const submitEmit = defineEmits(['emit-credentials'])
 
 function emitCredentials(): void {
-  usernameValidation(username.value)
+    usernameValidation(username.value)
     passwordValidation(password.value)
     
     if (!usernameError.value && !passwordError.value) {

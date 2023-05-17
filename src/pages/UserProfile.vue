@@ -38,7 +38,6 @@
 <script setup lang="ts">
 import type { Ref } from "vue"
 import { defineAsyncComponent, onMounted, ref, watch } from 'vue'
-import { useI18n } from 'vue-i18n'
 import { useStateUserStore } from '../store/StateUser'
 import { Todo, SelectedTodos } from "../types/TodoType"
 import { getTodos, postTodo, putTodo, deleteTodo } from '../api/Todos'
@@ -48,7 +47,6 @@ import TodosComponent from "../components/userProfile/TodosComponent.vue"
 
 const CustomLoader = defineAsyncComponent(() => import("../components/CustomLoader.vue"))
 
-const { t } = useI18n()
 const store = useStateUserStore()
 const userId = store.userId
 const todos: Ref<Todo[]> = ref([])

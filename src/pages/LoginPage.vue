@@ -17,7 +17,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { Ref } from 'vue'
-import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import type { Router } from 'vue-router'
 import { useStateUserStore } from '../store/StateUser'
@@ -25,7 +24,6 @@ import { getUser } from '../api/Users'
 import type { User } from '../types/UserType'
 import LoginForm from '../components/LoginForm.vue'
 
-const { t } = useI18n()
 const store = useStateUserStore()
 const usersData: Ref<User | null> = ref(null)
 const router: Router = useRouter()

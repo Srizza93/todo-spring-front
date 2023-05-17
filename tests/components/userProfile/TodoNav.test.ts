@@ -9,7 +9,7 @@ config.global.stubs = {
     RouterLink: true
   }
 
-describe('Should handle a todo modal', () => {
+describe('Should render a todo nav bar', () => {
 
   beforeEach(() => {
     setActivePinia(createPinia())

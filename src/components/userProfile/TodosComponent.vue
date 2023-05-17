@@ -4,7 +4,7 @@
             <span v-if="todo.due" class="todos_todo_due">
                 <b v-if="!isTodoExpired(todo)">{{ $t('userProfile.due') }}:</b>
                 <b v-else>{{ $t('userProfile.expired') }}:</b>
-                 {{ formatDate(todo.due) }}
+                <span>{{ formatDate(todo.due) }}</span>
             </span>
             <div class="todos_todo_middle">
                 <p class="todos_todo_middle_content">{{ todo.content }}</p>

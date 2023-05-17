@@ -1,8 +1,12 @@
-import { describe, expect, it, vi } from 'vitest'
-import { shallowMount } from '@vue/test-utils'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { DOMWrapper, shallowMount } from '@vue/test-utils'
 import LoginForm from '@/components/LoginForm.vue'
 
 describe('Should set a login form', () => {
+
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
 
   it('should toggle a loader depending on the pending prop', async () => {
     const wrapper = shallowMount(LoginForm, {
@@ -46,7 +50,7 @@ describe('Should set a login form', () => {
     expect(invalidPassword.text()).toBe('forms.password forms.error')
   })
 
-  it('should emit login values', async () => {
+  it('should emit login values and reset the values', async () => {
     const wrapper = shallowMount(LoginForm, {
       props: {
         loginError: '' as string,
@@ -54,8 +58,8 @@ describe('Should set a login form', () => {
       }
     })
     const form = wrapper.find('form')
-    const usernameInput = wrapper.find('.todo-input[name="uname"]') 
-    const passwordInput = wrapper.find('.todo-input[name="pword"]') 
+    const usernameInput: DOMWrapper<Element> = wrapper.find('.todo-input[name="uname"]') 
+    const passwordInput: DOMWrapper<Element> = wrapper.find('.todo-input[name="pword"]') 
     const submit = wrapper.find('.todo-button[type="submit"]') 
 
     expect(submit.attributes('value')).toBe('processes.login')
@@ -69,7 +73,7 @@ describe('Should set a login form', () => {
     expect(wrapper.emitted()['emit-credentials']).toBeTruthy()
   })
 
-  it('shouldn t emit login values when incorrect', async () => {
+  it('shouldn t emit login values when incorrect and raise an error', async () => {
     const wrapper = shallowMount(LoginForm, {
       props: {
         loginError: '' as string,
@@ -79,13 +83,28 @@ describe('Should set a login form', () => {
     const form = wrapper.find('form')
     const usernameInput = wrapper.find('.todo-input[name="uname"]') 
     const passwordInput = wrapper.find('.todo-input[name="pword"]') 
+    const usernameError = wrapper.find('.error[for="uname"]')
+    const passwordError = wrapper.find('.error[for="pword"]')
     
     usernameInput.setValue('')
     passwordInput.setValue('password')
+
+    expect(usernameError.classes()).not.toContain('error-visible')
+    expect(passwordError.classes()).not.toContain('error-visible')
     
     form.trigger('submit')
     await wrapper.vm.$nextTick()
 
     expect(wrapper.emitted()['emit-credentials']).toBeFalsy()
+    
+    expect(usernameError.text()).toBe('forms.username forms.error')
+    expect(passwordError.text()).toBe('forms.password forms.error')
+    expect(usernameError.classes()).toContain('error-visible')
+    expect(passwordError.classes()).toContain('error-visible')
+
+    await vi.runAllTimers()
+
+    expect(usernameError.classes()).not.toContain('error-visible')
+    expect(passwordError.classes()).not.toContain('error-visible')
   })
 })

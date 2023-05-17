@@ -9,9 +9,15 @@ describe('Should setup the language', async () => {
 
     modalWrapper.trigger('click')
     await wrapper.vm.$nextTick()
-    
-    const modal = wrapper.find('.langs-modal')
+
+    let modal = wrapper.find('.langs-modal')
     expect(modal.exists()).toBe(true)
+
+    modalWrapper.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    modal = wrapper.find('.langs-modal')
+    expect(modal.exists()).toBe(false)
   })
 
   it('should get the langs', async () => {
@@ -27,5 +33,23 @@ describe('Should setup the language', async () => {
     expect(langs[0]).toBe('en')
     expect(langs[1]).toBe('fr')
     expect(langs[2]).toBe('it')
+  })
+
+  it('should emit the lang selected', async () => {
+    const wrapper = mount(LanguageSetupComponent)
+    const modalWrapper = wrapper.find('.langs')
+
+    modalWrapper.trigger('click')
+    await wrapper.vm.$nextTick()
+    
+    const langs = wrapper.findAll('.langs-modal_ul_lang')
+    
+    langs[0].trigger('click')
+    await wrapper.vm.$nextTick()
+
+    const emittedSubmit = wrapper.emitted()['emit-select'] as unknown[][]
+
+    expect(emittedSubmit).toBeTruthy()
+    expect((emittedSubmit[0][0] as { lang: string })).toEqual('en')
   })
 })

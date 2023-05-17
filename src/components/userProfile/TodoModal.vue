@@ -31,6 +31,7 @@
 <script lang="ts" setup>
 import type { Ref } from "vue"
 import { ref } from "vue"
+import { formatDate } from '../../services/formatDate'
 
 defineProps<{
   today: Date;
@@ -50,13 +51,6 @@ function emitSubmit(): void {
     dueDate.value = null
     content.value = ''
 }
-
-function formatDate(date: Date): string {
-    const day: string = date.getDate() + ''
-    const month: string = date.getMonth() + 1 + ''
-    return `${date.getFullYear()}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
-}
-
 </script>
 
 <style lang="scss" scoped>

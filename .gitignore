@@ -24,7 +24,8 @@ dist-ssr
 *.sln
 *.sw?
 
-##To prevent NPM issues on CI/CD with adeo repo
+##To prevent NPM issues on CI/CD
 settings.json
 tests/sonar-report.json
 sonar-report.json
+coverage

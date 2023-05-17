@@ -80,7 +80,7 @@ function emitCredentials(): void {
     }
     
     setTimeout(() => {
-        resetValues(false)
+      resetValues(false)
     }, 5000)
 }
 </script>

@@ -1,47 +1,16 @@
 {
-  "numTotalTestSuites": 6,
-  "numPassedTestSuites": 6,
+  "numTotalTestSuites": 2,
+  "numPassedTestSuites": 2,
   "numFailedTestSuites": 0,
   "numPendingTestSuites": 0,
-  "numTotalTests": 9,
-  "numPassedTests": 9,
+  "numTotalTests": 3,
+  "numPassedTests": 3,
   "numFailedTests": 0,
   "numPendingTests": 0,
   "numTodoTests": 0,
-  "startTime": 1684328565168,
+  "startTime": 1684349803244,
   "success": true,
   "testResults": [
-    {
-      "assertionResults": [
-        {
-          "ancestorTitles": [
-            "",
-            "Should display the app page"
-          ],
-          "fullName": " Should display the app page should set the lang into the i18n plugin",
-          "status": "passed",
-          "title": "should set the lang into the i18n plugin",
-          "duration": 401,
-          "failureMessages": []
-        },
-        {
-          "ancestorTitles": [
-            "",
-            "Should display the app page"
-          ],
-          "fullName": " Should display the app page should get the lang from browser to the store",
-          "status": "passed",
-          "title": "should get the lang from browser to the store",
-          "duration": 12,
-          "failureMessages": []
-        }
-      ],
-      "startTime": 1684328599382,
-      "endTime": 1684328599795,
-      "status": "passed",
-      "message": "",
-      "name": "/Users/simonerizza/todo-spring/front/tests/App.test.ts"
-    },
     {
       "assertionResults": [
         {
@@ -52,7 +21,7 @@
           "fullName": " Should setup the language should toggle the modal",
           "status": "passed",
           "title": "should toggle the modal",
-          "duration": 388,
+          "duration": 422,
           "failureMessages": []
         },
         {
@@ -63,79 +32,26 @@
           "fullName": " Should setup the language should get the langs",
           "status": "passed",
           "title": "should get the langs",
-          "duration": 255,
+          "duration": 65,
+          "failureMessages": []
+        },
+        {
+          "ancestorTitles": [
+            "",
+            "Should setup the language"
+          ],
+          "fullName": " Should setup the language should emit the lang selected",
+          "status": "passed",
+          "title": "should emit the lang selected",
+          "duration": 82,
           "failureMessages": []
         }
       ],
-      "startTime": 1684328584645,
-      "endTime": 1684328585288,
+      "startTime": 1684351730110,
+      "endTime": 1684351730679,
       "status": "passed",
       "message": "",
       "name": "/Users/simonerizza/todo-spring/front/tests/components/LanguageSetupComponent.test.ts"
-    },
-    {
-      "assertionResults": [
-        {
-          "ancestorTitles": [
-            "",
-            "Should set a login form"
-          ],
-          "fullName": " Should set a login form should toggle a loader depending on the pending prop",
-          "status": "passed",
-          "title": "should toggle a loader depending on the pending prop",
-          "duration": 319,
-          "failureMessages": []
-        },
-        {
-          "ancestorTitles": [
-            "",
-            "Should set a login form"
-          ],
-          "fullName": " Should set a login form should warn with an invalid username error",
-          "status": "passed",
-          "title": "should warn with an invalid username error",
-          "duration": 31,
-          "failureMessages": []
-        },
-        {
-          "ancestorTitles": [
-            "",
-            "Should set a login form"
-          ],
-          "fullName": " Should set a login form should warn with an invalid password error",
-          "status": "passed",
-          "title": "should warn with an invalid password error",
-          "duration": 13,
-          "failureMessages": []
-        },
-        {
-          "ancestorTitles": [
-            "",
-            "Should set a login form"
-          ],
-          "fullName": " Should set a login form should emit login values",
-          "status": "passed",
-          "title": "should emit login values",
-          "duration": 436,
-          "failureMessages": []
-        },
-        {
-          "ancestorTitles": [
-            "",
-            "Should set a login form"
-          ],
-          "fullName": " Should set a login form shouldn t emit login values when incorrect",
-          "status": "passed",
-          "title": "shouldn t emit login values when incorrect",
-          "duration": 250,
-          "failureMessages": []
-        }
-      ],
-      "startTime": 1684328585320,
-      "endTime": 1684328586369,
-      "status": "passed",
-      "message": "",
-      "name": "/Users/simonerizza/todo-spring/front/tests/components/LoginForm.test.ts"
     }
   ]
 }

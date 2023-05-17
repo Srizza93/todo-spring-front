@@ -8,7 +8,7 @@ const todos: Todo[] = [
         id: 1,
         userId: '123',
         content: 'abc',
-        created: new Date(),
+        created: new Date('2023-05-17'),
         done: false
     },
     {

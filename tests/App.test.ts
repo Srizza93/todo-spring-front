@@ -12,8 +12,8 @@ const locale: { value: string } = { value: '' };
 
 vi.mock('@/store/StateUserService', () => ({
   useStateUserStore: {
-    language: '',
-    updateLanguage: vi.fn(),
+    language: '' as string,
+    updateLanguage: vi.fn() as Function,
   }
 }));
 

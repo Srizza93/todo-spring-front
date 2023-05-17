@@ -3,12 +3,12 @@
   "numPassedTestSuites": 2,
   "numFailedTestSuites": 0,
   "numPendingTestSuites": 0,
-  "numTotalTests": 3,
-  "numPassedTests": 3,
+  "numTotalTests": 2,
+  "numPassedTests": 2,
   "numFailedTests": 0,
   "numPendingTests": 0,
   "numTodoTests": 0,
-  "startTime": 1684349803244,
+  "startTime": 1684355515260,
   "success": true,
   "testResults": [
     {
@@ -16,42 +16,31 @@
         {
           "ancestorTitles": [
             "",
-            "Should setup the language"
+            "Should handle a todo modal"
           ],
-          "fullName": " Should setup the language should toggle the modal",
+          "fullName": " Should handle a todo modal should emit the todos type selected",
           "status": "passed",
-          "title": "should toggle the modal",
-          "duration": 422,
+          "title": "should emit the todos type selected",
+          "duration": 547,
           "failureMessages": []
         },
         {
           "ancestorTitles": [
             "",
-            "Should setup the language"
+            "Should handle a todo modal"
           ],
-          "fullName": " Should setup the language should get the langs",
+          "fullName": " Should handle a todo modal should logout",
           "status": "passed",
-          "title": "should get the langs",
-          "duration": 65,
-          "failureMessages": []
-        },
-        {
-          "ancestorTitles": [
-            "",
-            "Should setup the language"
-          ],
-          "fullName": " Should setup the language should emit the lang selected",
-          "status": "passed",
-          "title": "should emit the lang selected",
-          "duration": 82,
+          "title": "should logout",
+          "duration": 157,
           "failureMessages": []
         }
       ],
-      "startTime": 1684351730110,
-      "endTime": 1684351730679,
+      "startTime": 1684356815758,
+      "endTime": 1684356816463,
       "status": "passed",
       "message": "",
-      "name": "/Users/simonerizza/todo-spring/front/tests/components/LanguageSetupComponent.test.ts"
+      "name": "/Users/simonerizza/todo-spring/front/tests/components/userProfile/TodoNav.test.ts"
     }
   ]
 }

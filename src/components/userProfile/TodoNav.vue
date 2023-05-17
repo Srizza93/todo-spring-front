@@ -5,7 +5,8 @@
                 <button 
                     v-for="todoButton in todoButtons" 
                     :key="todoButton.id" 
-                    class="todo-button" 
+                    class="todo-button"
+                    data-test-id="typeButton"
                     :class="{ selected: selectedTodos === todoButton.type}"
                     @click="emitSelect(todoButton.type)"
                     >

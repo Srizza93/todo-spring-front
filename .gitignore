@@ -28,4 +28,7 @@ dist-ssr
 settings.json
 tests/sonar-report.json
 sonar-report.json
-coverage
+
+
+# Ignore tests coverage
+tests/coverage

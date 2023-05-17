@@ -16,8 +16,6 @@ const router = {
 
 vi.stubGlobal('useRouter', vi.fn(() => router));
 
-vi.stubGlobal('RouterView', vi.fn(() => router));
-
 const routerPush = vi.fn();
 vi.mock('vue-router', () => {
   return ({

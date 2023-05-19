@@ -6,7 +6,7 @@
         <div class="login_main">
             <img class="login_main_logo" src="/check.svg" alt="logo" />
             <LoginForm 
-              @emit-credentials="loginValidation" 
+              @emit-credentials.native="loginValidation" 
               :login-error="loginError" 
               :pending="pending" 
             />
@@ -21,7 +21,7 @@ import { useRouter } from 'vue-router'
 import type { Router } from 'vue-router'
 import { useStateUserStore } from '../store/StateUser'
 import { getUser } from '../api/Users'
-import type { User } from '../types/UserType'
+import type { User, Credentials } from '../types/UserType'
 import LoginForm from '../components/LoginForm.vue'
 
 const store = useStateUserStore()
@@ -29,11 +29,6 @@ const usersData: Ref<User | null> = ref(null)
 const router: Router = useRouter()
 const loginError: Ref<string> = ref('')
 const pending: Ref<boolean> = ref(false)
-
-interface Credentials {
-    username: string;
-    password: string;
-}
 
 async function loginValidation(credentials: Credentials): Promise<void> {
     pending.value = true

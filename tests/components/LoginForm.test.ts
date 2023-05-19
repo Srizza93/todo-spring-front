@@ -5,7 +5,7 @@ import LoginForm from '@/components/LoginForm.vue'
 describe('Should set a login form', () => {
 
   beforeEach(() => {
-    vi.useFakeTimers();
+    vi.useFakeTimers()
   });
 
   it('should toggle a loader depending on the pending prop', async () => {

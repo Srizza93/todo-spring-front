@@ -1,5 +1,5 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { config, shallowMount } from '@vue/test-utils'
+import { describe, expect, it, vi } from 'vitest'
+import { shallowMount } from '@vue/test-utils'
 import TodosComponent from '@/components/userProfile/TodosComponent.vue'
 import { SelectedTodos, Todo } from "@/types/TodoType"
 

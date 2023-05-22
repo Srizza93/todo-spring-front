@@ -5,11 +5,12 @@
                 <button 
                     v-for="todoButton in todoButtons" 
                     :key="todoButton.id" 
-                    class="todo-button" 
+                    class="todo-button"
+                    data-test-id="typeButton"
                     :class="{ selected: selectedTodos === todoButton.type}"
                     @click="emitSelect(todoButton.type)"
                     >
-                    {{ t(`userProfile.${todoButton.text}`) }}
+                    {{ $t(`userProfile.${todoButton.text}`) }}
                 </button>
             </div>
         <div class="settings_logout">
@@ -18,7 +19,7 @@
               @click="logOut"
               to="/"
             >
-                {{ t('processes.logout') }}
+                {{ $t('processes.logout') }}
             </RouterLink>
         </div>
         </div>
@@ -27,7 +28,6 @@
 <script lang="ts" setup>
 import type { Ref } from "vue"
 import { ref } from "vue"
-import { useI18n } from 'vue-i18n'
 import { useStateUserStore } from '../../store/StateUser'
 import type { TodoIndex } from "../../types/TodoType"
 import { SelectedTodos } from "../../types/TodoType"
@@ -36,7 +36,6 @@ defineProps<{
   selectedTodos: SelectedTodos;
 }>();
 
-const { t } = useI18n()
 const todoButtons: Ref<TodoIndex[]> = ref([
     {
         id: 1,

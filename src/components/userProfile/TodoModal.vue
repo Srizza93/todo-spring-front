@@ -19,25 +19,24 @@
           v-model="content"
           maxlength="100"
           rows="4"
-          :placeholder="t('userProfile.modalPlaceholder')"
+          :placeholder="$t('userProfile.modalPlaceholder')"
           autofocus
           contenteditable
           @keyup.enter="emitSubmit"
         ></textarea>
-        <input class="todo-button" type="submit" :value="t('userProfile.add')" />
+        <input class="todo-button" type="submit" :value="$t('userProfile.add')" />
     </form>
 </template>
 
 <script lang="ts" setup>
 import type { Ref } from "vue"
 import { ref } from "vue"
-import { useI18n } from 'vue-i18n'
+import { formatDate } from '../../services/formatDate'
 
 defineProps<{
   today: Date;
 }>();
 
-const { t } = useI18n()
 const submitEmit = defineEmits(['emit-closure', 'emit-submit'])
 const dueDate: Ref<Date | null> = ref(null)
 const content: Ref<string> = ref("")
@@ -52,13 +51,6 @@ function emitSubmit(): void {
     dueDate.value = null
     content.value = ''
 }
-
-function formatDate(date: Date): string {
-    const day: string = date.getDate() + ''
-    const month: string = date.getMonth() + 1 + ''
-    return `${date.getFullYear()}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
-}
-
 </script>
 
 <style lang="scss" scoped>

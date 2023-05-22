@@ -2,59 +2,132 @@
     <div class="signup">
         <form class="signup_form" @submit.prevent="submitForm">
             <section class="signup_form_section success" :class="{ 'success-visible': successfulSignup}">
-                <span>{{ t('forms.success.line1') }}</span>
-                <span>{{ t('forms.success.line2') }}</span>
+                <span>{{ $t('forms.success.line1') }}</span>
+                <span>{{ $t('forms.success.line2') }}</span>
                 <span class="success_email">{{ email }}</span>
             </section>
             <section class="signup_form_section">
-                <label>{{ t('forms.username') }}</label>
-                <input class="todo-input" type="text" v-model="username" />
-                <label class="error" :class="{ 'error-visible': usernameError }">{{ t('forms.username') }} {{ t('forms.error') }}</label>
+                <label>{{ $t('forms.username') }}</label>
+                <input 
+                  class="todo-input" 
+                  type="text" 
+                  v-model="username"
+                  data-test-id="username"
+                />
+                <label 
+                  class="error" 
+                  :class="{ 'error-visible': usernameError }"
+                  data-test-id="usernameError"
+                >
+                  {{ $t('forms.username') }} {{ $t('forms.error') }}
+                </label>
             </section>
             <section class="signup_form_section">
-                <label>{{ t('forms.name') }}</label>
-                <input class="todo-input" type="text" v-model="name" />
-                <label class="error" :class="{ 'error-visible': nameError }">{{ t('forms.name') }} {{ t('forms.error') }}</label>
+                <label>{{ $t('forms.name') }}</label>
+                <input 
+                  class="todo-input" 
+                  type="text" 
+                  v-model="name"
+                  data-test-id="name"
+                />
+                <label 
+                  class="error" 
+                  :class="{ 'error-visible': nameError }"
+                  data-test-id="nameError"
+                >
+                  {{ $t('forms.name') }} {{ $t('forms.error') }}
+                </label>
             </section>
             <section class="signup_form_section">
-                <label>{{ t('forms.surname') }}</label>
-                <input class="todo-input" type="text" v-model="surname" />
-                <label class="error" :class="{ 'error-visible': surnameError }">{{ t('forms.surname') }} {{ t('forms.error') }}</label>
+                <label>{{ $t('forms.surname') }}</label>
+                <input 
+                  class="todo-input" 
+                  type="text" 
+                  v-model="surname"
+                  data-test-id="surname"
+                />
+                <label 
+                  class="error" 
+                  :class="{ 'error-visible': surnameError }"
+                  data-test-id="surnameError"
+                >
+                  {{ $t('forms.surname') }} {{ $t('forms.error') }}
+                </label>
             </section>
             <section class="signup_form_section">
-                <label>{{ t('forms.email') }}</label>
-                <input class="todo-input" type="email" v-model="email" />
-                <label v-if="emailError" class="error" :class="{ 'error-visible': emailError }">{{ t('forms.email') }} {{ t('forms.error') }}</label>
-                <label v-else class="error" :class="{ 'error-visible': emailUsed }">{{ t('forms.email') }} {{ t('forms.hasBeenUsed') }}</label>
+                <label>{{ $t('forms.email') }}</label>
+                <input 
+                  class="todo-input"
+                  type="email"
+                  v-model="email"
+                  data-test-id="email"
+                />
+                <label 
+                  v-if="emailError" 
+                  class="error" 
+                  :class="{ 'error-visible': emailError }"
+                  data-test-id="emailError"
+                >
+                  {{ $t('forms.email') }} {{ $t('forms.error') }}
+                </label>
+                <label 
+                  v-else 
+                  class="error" 
+                  :class="{ 'error-visible': emailUsed }"
+                  data-test-id="emailUsed"
+                >
+                  {{ $t('forms.email') }} {{ $t('forms.hasBeenUsed') }}
+                </label>
             </section>
             <section class="signup_form_section">
-                <label>{{ t('forms.password') }}</label>
-                <input class="todo-input" type="password" v-model="password" />
-                <label class="error" :class="{ 'error-visible': passwordError }">{{ t('forms.password') }} {{ t('forms.error') }}</label>
+                <label>{{ $t('forms.password') }}</label>
+                <input 
+                  class="todo-input"
+                  type="password"
+                  v-model="password"
+                  data-test-id="password"
+                />
+                <label 
+                  class="error" 
+                  :class="{ 'error-visible': passwordError }"
+                  data-test-id="passwordError"
+                >
+                  {{ $t('forms.password') }} {{ $t('forms.error') }}
+                </label>
             </section>
             <section class="signup_form_section">
-                <label>{{ t('forms.confirmPassword') }}</label>
-                <input class="todo-input" type="password" v-model="confPassword" />
-                <label class="error" :class="{ 'error-visible': confPasswordError }">{{ t('forms.confPasswordError') }}</label>
+                <label>{{ $t('forms.confirmPassword') }}</label>
+                <input 
+                  class="todo-input" 
+                  type="password" 
+                  v-model="confPassword"
+                  data-test-id="confPassword"
+                />
+                <label 
+                  class="error" 
+                  :class="{ 'error-visible': confPasswordError }"
+                  data-test-id="confPasswordError"
+                >
+                  {{ $t('forms.confPasswordError') }}
+                </label>
             </section>
             <section class="signup_form_section-signup">
                 <input
                   v-if="!pending"
                   class="todo-button signup_form_section_signup" 
                   type="submit" 
-                  :value="t('processes.signup')" 
+                  :value="$t('processes.signup')" 
                 />
                 <CustomLoader v-else />
             </section>
             <section class="login-section">
-                <span>{{ t('signupPage.haveAnAccount') }} <RouterLink class="todo-link" to="/">{{ t('processes.login') }}</RouterLink></span>   
+                <span>{{ $t('signupPage.haveAnAccount') }} <RouterLink class="todo-link" to="/">{{ $t('processes.login') }}</RouterLink></span>   
             </section>
         </form>
     </div>
 </template>
 
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
 import formValidation from "../services/formValidation"
 import { signupUser } from "../api/Users"
 import { User } from "../types/UserType";
@@ -63,7 +136,6 @@ import type { Ref } from "vue";
 
 const CustomLoader = defineAsyncComponent(() => import("../components/CustomLoader.vue"))
 
-const { t } = useI18n()
 const {
     username,
     name,

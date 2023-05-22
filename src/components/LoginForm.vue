@@ -1,7 +1,7 @@
 <template>
     <form class="form" @submit.prevent="emitCredentials">
         <section class="form_section">
-            <label for="uname">{{ t('forms.username') }}</label>
+            <label for="uname">{{ $t('forms.username') }}</label>
             <input 
               class="todo-input" 
               type="text"
@@ -14,11 +14,11 @@
               for="uname"
               :class="{'error-visible': loginError === 'Invalid username' || usernameError}"
             >
-            {{ t('forms.username') }} {{ t('forms.error') }}
+            {{ $t('forms.username') }} {{ $t('forms.error') }}
             </label>
         </section>
         <section class="form_section">
-            <label for="pword">{{ t('forms.password') }}</label>
+            <label for="pword">{{ $t('forms.password') }}</label>
             <input 
               class="todo-input"
               name="pword"
@@ -31,7 +31,7 @@
               for="pword"
               :class="{'error-visible': loginError === 'Invalid password' || passwordError}"
             >
-            {{ t('forms.password') }} {{ t('forms.error') }}
+            {{ $t('forms.password') }} {{ $t('forms.error') }}
             </label>
         </section>
         <section class="form_section form_section-login" >
@@ -39,7 +39,7 @@
               v-if="!pending"
               class="todo-button form_section-login_login" 
               type="submit" 
-              :value="t('processes.login')" 
+              :value="$t('processes.login')" 
             />
             <CustomLoader v-else />
         </section>
@@ -49,12 +49,10 @@
 <script setup lang="ts">
 import { defineAsyncComponent, ref } from 'vue'
 import type { Ref } from 'vue'
-import { useI18n } from 'vue-i18n'
 import formValidation from '../services/formValidation'
 
 const CustomLoader = defineAsyncComponent(() => import("./CustomLoader.vue"))
 
-const { t } = useI18n() 
 const {
     usernameError,
     passwordError,
@@ -73,7 +71,7 @@ const password: Ref<string> = ref("")
 const submitEmit = defineEmits(['emit-credentials'])
 
 function emitCredentials(): void {
-  usernameValidation(username.value)
+    usernameValidation(username.value)
     passwordValidation(password.value)
     
     if (!usernameError.value && !passwordError.value) {
@@ -82,7 +80,7 @@ function emitCredentials(): void {
     }
     
     setTimeout(() => {
-        resetValues(false)
+      resetValues(false)
     }, 5000)
 }
 </script>

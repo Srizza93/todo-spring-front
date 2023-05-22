@@ -1,27 +1,6 @@
-import { useI18n } from "vue-i18n"
-
-interface Lang {
-    text: string
-    type: string
-}
-
 export default function() {
-    const { t } = useI18n()
 
-    const langs: Lang[] = [
-        {
-            text: t('langs.en'),
-            type: 'en'
-        }, 
-        {
-            text: t('langs.fr'),
-            type: 'fr'
-        },
-        {
-            text: t('langs.it'),
-            type: 'it'
-        },
-    ]
+    const langs: string[] = ['en', 'fr', 'it']
 
     function convertLanguage(lang: string): string {
         switch (lang) {

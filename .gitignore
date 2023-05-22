@@ -23,3 +23,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+##To prevent NPM issues on CI/CD
+settings.json
+tests/sonar-report.json
+sonar-report.json
+
+
+# Ignore tests coverage
+tests/coverage

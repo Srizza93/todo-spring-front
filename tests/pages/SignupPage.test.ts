@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { VueWrapper, config, shallowMount } from '@vue/test-utils'
+import { config, shallowMount } from '@vue/test-utils'
 import flushPromises from 'flush-promises'
 import SignupPage from '@/pages/SignupPage.vue'
 
@@ -7,7 +7,6 @@ config.global.stubs = {
     RouterLink: true
 }
 
-let errorMessage: string = 'Error Test'
 const errorMessages: {
     [key: string]: string
 } = {

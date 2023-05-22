@@ -11,14 +11,14 @@ config.global.stubs = {
   }
 
 vi.mock('@/store/StateUserService', () => ({
-useStateUserStore: {
-    token: '' as string,
-    userId: '' as string,
-    loggedIn: false as boolean,
-    updateToken: vi.fn() as Function,
-    updateUserId: vi.fn() as Function,
-    setUserStatus: vi.fn() as Function,
-}
+    useStateUserStore: {
+        token: '' as string,
+        userId: '' as string,
+        loggedIn: false as boolean,
+        updateToken: vi.fn() as Function,
+        updateUserId: vi.fn() as Function,
+        setUserStatus: vi.fn() as Function,
+    }
 }));
 
 const mockUser: User = {
@@ -48,7 +48,7 @@ vi.mock('@/api/Users', () => ({
         }
       });
     }),
-  }));
+}));
 
 describe('Should handle the login page', () => {
 

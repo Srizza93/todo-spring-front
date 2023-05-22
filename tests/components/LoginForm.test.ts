@@ -22,6 +22,10 @@ describe('Should set a login form', () => {
     await wrapper.setProps({ pending: false })
 
     expect(loader.exists()).toBe(false)
+
+    const submit = wrapper.find('[type="submit"]')
+
+    expect(submit.attributes('value')).toBe('processes.login')
   })
 
   it('should warn with an invalid username error', async () => {

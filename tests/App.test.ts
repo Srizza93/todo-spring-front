@@ -49,5 +49,24 @@ describe('Should display the app page', () => {
     const userStore = useStateUserStore()
     expect(userStore.language).toBe('fr')
   });
+
+  it('should update the lang with a parameter', async () => {
+    const wrapper = shallowMount(App);
+
+    const userStore = useStateUserStore()
+
+    wrapper.vm.setLanguage('de')
+
+    expect(userStore.language).toBe('de')
+  });
+
+  it('should update the lang from the store', async () => {
+    shallowMount(App);
+
+    const userStore = useStateUserStore()
+    userStore.updateLanguage('it')
+
+    expect(userStore.language).toBe('it')
+  });
   
 });

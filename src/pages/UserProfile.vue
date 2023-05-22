@@ -19,7 +19,7 @@
           :today="today"
         />
         <TodosComponent 
-          v-if="todos && !pending" 
+          v-if="todos.length > 0 && !pending" 
           @emit-delete="deleteTodoItem" 
           @emit-done="submitDone" 
           :todos="todos" 

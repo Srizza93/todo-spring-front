@@ -3,6 +3,7 @@ import { mount } from '@vue/test-utils'
 import LanguageSetupComponent from '@/components/LanguageSetupComponent.vue'
 
 describe('Should setup the language', async () => {
+
   it('should toggle the modal', async () => {
     const wrapper = mount(LanguageSetupComponent)
     const modalWrapper = wrapper.find('.langs')
@@ -18,6 +19,23 @@ describe('Should setup the language', async () => {
 
     modal = wrapper.find('.langs-modal')
     expect(modal.exists()).toBe(false)
+  })
+
+  it('should close the modal', async () => {
+    const wrapper = mount(LanguageSetupComponent)
+    const modalWrapper = wrapper.find('.langs')
+
+    modalWrapper.trigger('click')
+    await wrapper.vm.$nextTick()
+    
+    let modal = wrapper.find('.langs-modal')
+    expect(modal.exists()).toBe(true)
+    
+    wrapper.vm.closeModal()
+    await wrapper.vm.$nextTick()
+
+    modal = wrapper.find('.langs-modal')
+    expect(modal.exists()).toBeFalsy()
   })
 
   it('should get the langs', async () => {

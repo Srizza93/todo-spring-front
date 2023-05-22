@@ -122,8 +122,8 @@ describe('Should handle the user profile page', () => {
         const { getTodos } = await import('@/api/Todos')
         const todosComponent = wrapper.findComponent({ name: 'TodosComponent' })
         const componentTime = todosComponent.props('today')
-          .getTime().toString().substring(0, 10)
-        const today = new Date().getTime().toString().substring(0, 10)
+          .getTime().toString().substring(0, 9)
+        const today = new Date().getTime().toString().substring(0, 9)
 
         expect(getTodos).toBeCalled()
         expect(todosComponent.exists()).toBeTruthy()

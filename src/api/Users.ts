@@ -1,7 +1,6 @@
 import axios from 'axios'
 import type { User } from '../types/UserType'
 
-
 export async function getUser(username: string, password: string): Promise<User> {
     return axios.post(`/api/login`, { username, password })
       .then(res => {

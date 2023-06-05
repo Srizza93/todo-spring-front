@@ -184,6 +184,10 @@ async function submitForm(): Promise<void> {
             }
             await signupUser(newUser)
             successfulSignup.value = true;
+
+            setTimeout(() => {
+                resetValues(true)
+            }, 5000)
         } catch(error: any) {
             if (error.message === "This username has been used already") {
                 usernameError.value = true
@@ -203,10 +207,10 @@ async function submitForm(): Promise<void> {
             if (error.message === "The password format is not valid") {
                 passwordError.value = true
             }
-        } finally {
             setTimeout(() => {
-                resetValues(true)
+                resetValues(false)
             }, 5000)
+        } finally {
             pending.value = false
         }
     } else {
